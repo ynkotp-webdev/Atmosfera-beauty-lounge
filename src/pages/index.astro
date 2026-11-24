@@ -59,11 +59,12 @@ const ratings = places.map((pl) => ({
 const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `${addon ? '+ ' : ''}${uah(v)}`);
 ---
 <Base home title="Атмосфера: салон краси у Львові, Шевченка, 17 і Залізнична, 9" description={`Салон краси Атмосфера у Львові: манікюр і педикюр, подологія, стрижки й фарбування, брови та вії, макіяж. Дві адреси, онлайн-запис і відкриті ціни.`}>
-  <!-- Перший екран: слово розбите як на візитці салону -->
+  <!-- Перший екран: слово розбите як на візитці салону. На телефоні кадр залу схований, тому sizes 1px: браузер бере найменший файл -->
+
   <section class="hero">
     <Image src={watercolor} alt="" widths={[640, 1100, 1600]} sizes="(max-width: 720px) 130vw, 58vw" class="wash" loading="eager" />
     <div class="atmo"><Wordmark part="atmo" gold /></div>
-    <Image src={hall} alt="Зал перукарів у салоні Атмосфера: пудрові крісла, арочні дзеркала, темно-зелена стіна" widths={[520, 800, 1100, 1600]} sizes="(max-width: 720px) 62vw, 33vw" class="shot" loading="eager" fetchpriority="high" />
+    <Image src={hall} alt="Зал перукарів у салоні Атмосфера: пудрові крісла, арочні дзеркала, темно-зелена стіна" widths={[520, 800, 1100, 1600]} sizes="(max-width: 720px) 1px, 33vw" class="shot" loading="eager" fetchpriority="high" />
     <div class="sfera"><Wordmark part="sfera" gold /></div>
     <div class="say">
       <h1 class="disp hero-h">Салон краси<br />у Львові</h1>
@@ -99,7 +100,7 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
           </div>
         )}
         <div class="aside">
-          <Said q={s.quote} />
+          <Said q={s.quote} sign={false} />
         </div>
       </article>
     ))}
@@ -109,9 +110,9 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
   <section class="room wrap grid12">
     <Image src={reception} alt="Ресепшн салону на Шевченка, 17: вивіска Atmosfera Beauty Lounge на темно-зеленій стіні, кругле дзеркало, стелаж із зеленню, оливковий диван" widths={[640, 900, 1300, 1700]} sizes="(max-width: 720px) 100vw, 57vw" class="print r-main" />
     <h2 class="disp h2 r-h">У залі</h2>
-    <Said q={q.cozy} class="sheet note n1" text="disp h4" />
-    <Said q={q.clean} class="n2" />
-    <Said q={q.coffee} class="card note n3" text="disp h4" />
+    <Said q={q.cozy} class="sheet note n1" text="disp h4" sign={false} />
+    <Said q={q.clean} class="n2" sign={false} />
+    <Said q={q.coffee} class="card note n3" text="disp h4" sign={false} />
     <Image src={pedicure} alt="Келих лимонаду на столику в залі педикюру, за ним клієнтка в кріслі" widths={[420, 640, 900, 1100]} sizes="(max-width: 720px) 72vw, 32vw" class="print r-side" />
   </section>
 
@@ -188,16 +189,18 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
           <h3 class="disp h3">{m.name}</h3>
           <p class="mute small">{m.role} · {m.where}</p>
         </div>
-        <Said q={m.home!} class={`note ${i === 0 ? 'sheet' : 'card'}`} text="disp h4" />
+        <Said q={m.home!} class={`note ${i === 0 ? 'sheet' : 'card'}`} text="disp h4" sign={false} />
       </article>
     ))}
     {leaders.slice(2).map((m, i) => (
       <article class={`line l${i + 1}`}>
         <h3 class="disp h3">{m.name}</h3>
         <p class="mute small">{m.role} · {m.where}</p>
-        <Said q={m.home!} />
+        <Said q={m.home!} sign={false} />
       </article>
     ))}
+    <!-- Друга кнопка після чотирьох: подивилась лідерів, далі вся команда -->
+    <a class="card all all-end disp h4" href={to('/komanda')}>Уся команда</a>
   </section>
 
   <!-- Відгуки: оцінки двох адрес на двох майданчиках, поруч слова клієнток -->
@@ -396,7 +399,7 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
   .orbit li { flex: none; scroll-snap-align: start; scroll-margin-left: var(--gut); }
   .frame { width: auto; height: var(--fh); aspect-ratio: 4 / 5; object-fit: cover; }
   /* З JS: кадри стоять на еліпсі, скрипт крутить кільце */
-  .orbit.on { position: relative; height: calc(var(--fh) * 1.2); margin-top: clamp(1rem, 2.5vw, 2rem); overflow: clip; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+  .orbit.on { position: relative; isolation: isolate; /* z-index кадрів живе тільки всередині кільця, шапку й курсор не перекриває */ height: calc(var(--fh) * 1.2); margin-top: clamp(1rem, 2.5vw, 2rem); overflow: clip; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
   .orbit.on.grab { cursor: grabbing; }
   .orbit.on ul { display: block; height: 100%; padding: 0; overflow: visible; }
   .orbit.on li { position: absolute; left: 50%; top: calc(100% - var(--fh) / 2); will-change: transform, opacity; }
@@ -424,6 +427,7 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
   .line .said { margin-top: 0.75rem; }
   .l1 { grid-column: 1 / span 4; }
   .l2 { grid-column: 5 / span 4; }
+  .all-end { grid-row: 2; grid-column: 9 / span 4; align-self: end; justify-self: start; margin-top: 0; }
 
   /* Відгуки */
   .revs { padding-top: var(--block); align-items: start; row-gap: var(--gap); }
@@ -462,6 +466,7 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
     .line { grid-row: 3; }
     .l1 { grid-column: 1 / span 6; }
     .l2 { grid-column: 7 / span 6; }
+    .all-end { grid-row: 4; grid-column: 1 / -1; }
     .rate-box { grid-column: 1 / -1; grid-row: auto; }
     .v1 { grid-column: 1 / -1; grid-row: auto; margin-top: 1.5rem; }
     .s1 { grid-column: 1 / span 5; }
@@ -472,7 +477,8 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
   @media (max-width: 720px) {
     .hero { height: auto; padding-top: 3.5rem; padding-bottom: 1.75rem; --cap: 17.4vw; }
     .atmo { position: relative; left: 0; top: 0; margin-top: 0.5rem; }
-    .shot { position: relative; left: 0; top: 0; width: 62vw; margin: -1.25rem calc(var(--gut) * -1) 0 auto; display: block; }
+    /* На телефоні кадр залу не влазив між ATMO і SFERA й закривав літери (правка Остапа 24.11): перший екран без фото */
+    .shot { display: none; }
     .sfera { position: relative; right: 0; bottom: 0; margin: 0.875rem 0 0 auto; }
     .wash { width: 130vw; left: -42vw; top: 7.5rem; }
     .say { position: relative; left: 0; right: 0; top: 0; margin-top: 1.5rem; padding-right: 6.25rem; }
@@ -508,6 +514,7 @@ const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `
     .orbit { --fh: 19rem; }
 
     .masters { display: flex; flex-direction: column; gap: 2.5rem; }
+    .all-end { align-self: flex-start; }
     .f1, .f2 { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 0; }
     .f1 .who, .f2 .who { grid-column: 1 / -1; grid-row: 1; margin-bottom: 0.75rem; }
     .f1 .print { grid-column: 1 / span 4; grid-row: 2; }

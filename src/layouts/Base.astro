@@ -3,10 +3,15 @@ import '../styles/global.css';
 import displayCyr from '@fontsource/tenor-sans/files/tenor-sans-cyrillic-400-normal.woff2?url';
 import Wordmark from '../components/Wordmark.astro';
 import { salon, places, to } from '../data/salon';
+import { getImage } from 'astro:assets';
+import hall from '../assets/photos/hair-zone.jpg';
 
 interface Props { title: string; description: string; home?: boolean; fab?: boolean }
 const { title, description, home = false, fab = true } = Astro.props;
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Прев'ю посилання в Telegram, Viber, Instagram: зал Шевченка, обрізаний до 1200×630. Месенджерам потрібна абсолютна адреса
+const og = await getImage({ src: hall, width: 1200, height: 630, format: 'jpg' });
+const ogImage = new URL(og.src, Astro.site).href;
 const nav = [
   { href: to('/tsiny'), label: 'Ціни' },
   { href: to('/komanda'), label: 'Майстри' },
@@ -22,15 +27,25 @@ const nav = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#c8e2d9" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:site_name" content="Atmosfera Beauty Lounge" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Зал салону Атмосфера: темно-зелена стіна, пудрові крісла, арочні дзеркала" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href={to('/favicon.svg')} />
     <link rel="preload" as="font" type="font/woff2" href={displayCyr} crossorigin />
   </head>
   <body>
     <a class="skip" href="#main">До змісту</a>
     <header class:list={['hd small', { home }]}>
-      {home
-        ? <span class="where">Львів · Шевченка, 17 · Залізнична, 9</span>
-        : <a class="brand" href={to('/')}><Wordmark part="main" label="Atmosfera Beauty Lounge, головна" /></a>}
+      <a class="brand" href={to('/')}><Wordmark part="main" label="Atmosfera Beauty Lounge, головна" /></a>
+      {home && <span class="where">Львів · Шевченка, 17 · Залізнична, 9</span>}
       <nav aria-label="Основна навігація">
         {nav.map((n) => <a href={n.href} aria-current={here === n.href ? 'page' : undefined}>{n.label}</a>)}
       </nav>
@@ -80,6 +95,38 @@ const nav = [
         </div>
       )}
     </main>
+
+    <script>
+      // М'який курсор: крапка точно під мишею, пудрова куля м'яко її наздоганяє (кулі-світильники й кругле дзеркало
+      // в залі). На посиланнях куля більшає, над кільцем «Роботи» стає кулею з написом «тягни». Тільки миша
+      const root = document.documentElement;
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const dot = document.createElement('div'), ball = document.createElement('div');
+        dot.className = 'cur-dot'; ball.className = 'cur-ball';
+        ball.innerHTML = '<span>тягни</span>';
+        dot.setAttribute('aria-hidden', 'true'); ball.setAttribute('aria-hidden', 'true');
+        document.body.append(ball, dot);
+        root.classList.add('cur', 'cur-off');
+        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let x = 0, y = 0, bx = 0, by = 0, raf = 0;
+        const follow = () => {
+          bx += (x - bx) * 0.18; by += (y - by) * 0.18;
+          ball.style.transform = `translate(${bx.toFixed(1)}px, ${by.toFixed(1)}px)`;
+          raf = Math.abs(x - bx) + Math.abs(y - by) > 0.2 ? requestAnimationFrame(follow) : 0;
+        };
+        addEventListener('pointermove', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          x = e.clientX; y = e.clientY;
+          if (root.classList.contains('cur-off')) { bx = x; by = y; root.classList.remove('cur-off'); }
+          dot.style.transform = `translate(${x}px, ${y}px)`;
+          if (still) { bx = x; by = y; ball.style.transform = dot.style.transform; } else if (!raf) raf = requestAnimationFrame(follow);
+          const t = e.target as Element;
+          const mode = t.closest('.orbit.on') ? 'drag' : t.closest('a, button, summary, label') ? 'link' : '';
+          if ((root.dataset.cur ?? '') !== mode) root.dataset.cur = mode;
+        }, { passive: true });
+        root.addEventListener('mouseleave', () => root.classList.add('cur-off'));
+      }
+    </script>
   </body>
 </html>
 
@@ -87,19 +134,28 @@ const nav = [
   .skip { position: absolute; left: var(--gut); top: -4rem; z-index: 50; padding: 0.75rem 1rem; background: var(--color-wall); color: var(--color-mint); }
   .skip:focus { top: 0.5rem; }
 
-  .hd { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.25rem); min-height: 4.75rem; padding-inline: var(--gut); position: relative; z-index: 5; }
-  .hd.home { position: absolute; inset: 0 0 auto; min-height: 4rem; justify-content: space-between; }
+  /* Шапка їде разом зі сторінкою: ціни й майстри завжди під рукою. Висота = --hd, від неї рахуються інші липкі блоки */
+  .hd { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.25rem); min-height: var(--hd); padding-inline: var(--gut); position: sticky; top: 0; z-index: 30; background: var(--color-mint); }
+  /* На головній шапка лежить поверх першого екрана, не зсуваючи його */
+  .hd.home { min-height: 4rem; margin-bottom: -4rem; justify-content: space-between; }
+  .hd.home .brand { display: none; }
   .brand { display: inline-flex; align-items: center; min-height: 2.75rem; width: 9.5rem; margin-right: auto; }
   .hd nav { display: flex; gap: clamp(0.5rem, 2vw, 2rem); }
   .hd nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.45em; transition: text-decoration-color 0.2s; }
   .hd nav a:hover, .hd nav a[aria-current] { text-decoration-color: currentColor; }
   .book { --sphere: 3.75rem; --sphere-bg: var(--color-wall); --sphere-fg: var(--color-mint); font-size: var(--t-label); }
   @media (max-width: 720px) {
-    .hd, .hd.home { min-height: 3.5rem; }
+    .hd, .hd.home { min-height: var(--hd); }
+    .hd.home { margin-bottom: calc(var(--hd) * -1); }
     .where, .book { display: none; }
     .hd.home nav { margin-left: auto; }
     .brand { width: 7.5rem; }
+    /* Головна на телефоні: знак у шапці проявляється, коли великий ATMO першого екрана поїхав угору */
+    @supports (animation-timeline: scroll()) {
+      .hd.home .brand { display: inline-flex; animation: brand-in linear both; animation-timeline: scroll(root); animation-range: 35vh 60vh; }
+    }
   }
+  @keyframes brand-in { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
 
   main { position: relative; }
   .fabzone { display: none; }

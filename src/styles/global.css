@@ -16,6 +16,7 @@
 }
 
 :root {
+  --hd: 4.75rem; /* висота липкої шапки: від неї відступають якорі й інші липкі блоки */
   --gut: clamp(1rem, 3.4vw, 3rem);
   --gap: clamp(0.75rem, 1.6vw, 1.5rem);
   --block: clamp(4.5rem, 9vw, 8.5rem); /* відстань між розділами */
@@ -36,7 +37,10 @@ html {
   background: var(--color-mint);
   -webkit-text-size-adjust: 100%;
   scrollbar-color: var(--color-sage) var(--color-mint);
-  scroll-padding-top: 1.5rem;
+  scroll-padding-top: calc(var(--hd) + 1.5rem);
+}
+@media (max-width: 720px) {
+  :root { --hd: 3.5rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
@@ -105,5 +109,19 @@ address { font-style: normal; }
 .stars { display: inline-block; position: relative; width: 5em; height: 1em; vertical-align: -0.12em; }
 .stars svg { position: absolute; inset: 0; width: 5em; height: 1em; }
 .stars .fill { clip-path: inset(0 calc(100% - var(--pct)) 0 0); }
+
+/* М'який курсор (скрипт у Base.astro). Клас .cur ставить скрипт, тому без JS і на тачі курсор звичайний */
+.cur, .cur * { cursor: none !important; }
+.cur-dot, .cur-ball { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; transition: opacity 0.25s; }
+.cur-off .cur-dot, .cur-off .cur-ball { opacity: 0; }
+/* Крапка інвертує те, що під нею: видно і на м'яті, і на темній картці, і на фото */
+.cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #fff; mix-blend-mode: difference; }
+.cur-ball::before { content: ''; position: absolute; left: -1.25rem; top: -1.25rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-rose); opacity: 0.75; mix-blend-mode: multiply; transition: transform 0.45s var(--ease-out), opacity 0.3s; }
+.cur-ball span { position: absolute; transform: translate(-50%, -50%); font-size: var(--t-label); font-weight: 600; color: var(--color-wall); white-space: nowrap; opacity: 0; transition: opacity 0.2s; }
+[data-cur='link'] .cur-ball::before { transform: scale(1.8); opacity: 0.6; }
+[data-cur='drag'] .cur-ball::before { transform: scale(2.6); opacity: 1; mix-blend-mode: normal; }
+[data-cur='drag'] .cur-ball span { opacity: 1; }
+[data-cur='drag'] .cur-dot { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .cur-ball::before { transition: none; } }
 
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

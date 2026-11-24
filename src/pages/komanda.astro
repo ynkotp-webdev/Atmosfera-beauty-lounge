@@ -53,7 +53,7 @@ const book = (at: string[]) => places.filter((pl) => at.includes(pl.key));
 
   /* Назва напряму ліворуч їде за прокруткою, майстри праворуч по три в ряд; середній стовпець нижче */
   .grp { padding-top: clamp(3.5rem, 7vw, 6.5rem); align-items: start; scroll-margin-top: 1rem; }
-  .g-h { grid-column: 1 / span 3; position: sticky; top: 1.5rem; }
+  .g-h { grid-column: 1 / span 3; position: sticky; top: calc(var(--hd) + 1.5rem); }
   .cast { grid-column: 4 / span 9; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); row-gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
   .cast li { scroll-margin-top: 1.5rem; }
   .cast li:nth-child(3n + 2) { margin-top: clamp(2.5rem, 5vw, 4.5rem); }

@@ -84,7 +84,7 @@ const [lv, nb] = places;
   .fair { grid-column: 8 / span 5; --pad: clamp(1.1rem, 1.8vw, 1.6rem); margin-bottom: -5rem; position: relative; z-index: 2; }
 
   .body { align-items: start; }
-  .rail { grid-column: 1 / span 3; position: sticky; top: 1.5rem; display: grid; gap: 1.75rem; justify-items: start; }
+  .rail { grid-column: 1 / span 3; position: sticky; top: calc(var(--hd) + 1.5rem); display: grid; gap: 1.75rem; justify-items: start; }
   .pp { position: relative; }
   .barzone { display: none; }
   .switch { display: grid; gap: 0.5rem; width: 100%; }
@@ -107,7 +107,7 @@ const [lv, nb] = places;
     .fair { margin-bottom: 0; }
     .rail { display: contents; }
     .idx, .bk { display: none; }
-    .switch { grid-column: 1 / -1; position: sticky; top: 0; z-index: 10; grid-template-columns: 1fr 1fr; gap: 0.25rem; padding-block: 0.5rem; background: var(--color-mint); margin-bottom: 0.5rem; }
+    .switch { grid-column: 1 / -1; position: sticky; top: var(--hd); z-index: 10; grid-template-columns: 1fr 1fr; gap: 0.25rem; padding-block: 0.5rem; background: var(--color-mint); margin-bottom: 0.5rem; }
     .switch .cap { grid-column: 1 / -1; }
     .opt { padding: 0.5rem; column-gap: 0.4rem; }
     .opt .sub { display: none; }
