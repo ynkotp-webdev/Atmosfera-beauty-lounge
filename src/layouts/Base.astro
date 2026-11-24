@@ -167,12 +167,9 @@ const nav = [
     .where, .book { display: none; }
     .hd.home nav { margin-left: auto; }
     .brand { width: 7.5rem; }
-    /* Головна на телефоні: знак у шапці проявляється, коли великий ATMO першого екрана поїхав угору */
-    @supports (animation-timeline: scroll()) {
-      .hd.home .brand { display: inline-flex; animation: brand-in linear both; animation-timeline: scroll(root); animation-range: 35vh 60vh; }
-    }
+    /* Головна на телефоні: знак у липкій шапці видно одразу (правка Остапа 24.11) */
+    .hd.home .brand { display: inline-flex; }
   }
-  @keyframes brand-in { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
 
   main { position: relative; }
   .fabzone { display: none; }
