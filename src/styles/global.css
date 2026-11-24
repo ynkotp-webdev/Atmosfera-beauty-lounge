@@ -11,6 +11,7 @@
   --color-moss: #3d5a55; /* другорядний текст на м'яті, 5.49:1 */
   --color-clay: #5c4a46; /* другорядний текст на пудрі, 5.70:1 */
   --color-blush: #d9c2bc; /* другорядний текст на темній картці, 9.87:1 */
+  --color-rosegold: #b78f85; /* темна зупинка рожевого золота вордмарка: куля курсора на м'яті */
   --font-display: "Tenor Sans", "Trebuchet MS", sans-serif;
   --font-sans: "Ysabeau Office Variable", system-ui, sans-serif;
 }
@@ -116,10 +117,14 @@ address { font-style: normal; }
 .cur-off .cur-dot, .cur-off .cur-ball { opacity: 0; }
 /* Крапка інвертує те, що під нею: видно і на м'яті, і на темній картці, і на фото */
 .cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #fff; mix-blend-mode: difference; }
-.cur-ball::before { content: ''; position: absolute; left: -1.25rem; top: -1.25rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-rose); opacity: 0.75; mix-blend-mode: multiply; transition: transform 0.45s var(--ease-out), opacity 0.3s; }
+/* Колір кулі від поверхні під мишею (data-on ставить скрипт): на м'яті рожеве золото, на пудрі шавлія, на темному пудра */
+.cur-ball::before { content: ''; position: absolute; left: -1.25rem; top: -1.25rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--color-rosegold); opacity: 0.85; transition: transform 0.45s var(--ease-out), opacity 0.3s, background-color 0.3s; }
+[data-on='rose'] .cur-ball::before { background: var(--color-sage); }
+[data-on='dark'] .cur-ball::before { background: var(--color-rose); }
 .cur-ball span { position: absolute; transform: translate(-50%, -50%); font-size: var(--t-label); font-weight: 600; color: var(--color-wall); white-space: nowrap; opacity: 0; transition: opacity 0.2s; }
-[data-cur='link'] .cur-ball::before { transform: scale(1.8); opacity: 0.6; }
-[data-cur='drag'] .cur-ball::before { transform: scale(2.6); opacity: 1; mix-blend-mode: normal; }
+[data-cur='link'] .cur-ball::before { transform: scale(1.8); opacity: 0.7; }
+/* Над кільцем «Роботи» завжди пудрова куля з написом, як куля запису */
+[data-cur='drag'] .cur-ball::before { transform: scale(2.6); opacity: 1; background: var(--color-rose); }
 [data-cur='drag'] .cur-ball span { opacity: 1; }
 [data-cur='drag'] .cur-dot { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .cur-ball::before { transition: none; } }

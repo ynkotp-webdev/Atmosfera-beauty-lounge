@@ -108,7 +108,24 @@ const nav = [
         document.body.append(ball, dot);
         root.classList.add('cur', 'cur-off');
         const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let x = 0, y = 0, bx = 0, by = 0, raf = 0;
+        let x = 0, y = 0, bx = 0, by = 0, raf = 0, last: Element | null = null;
+        // Поверхня під мишею: перший предок із заливкою. Темна, пудрова (червоний канал більший) або м'ятна
+        const surface = (el: Element | null) => {
+          for (let e = el; e && e !== root; e = e.parentElement) {
+            const [r, g, b, a = 1] = (getComputedStyle(e).backgroundColor.match(/[\d.]+/g) ?? []).map(Number);
+            if (r === undefined || a < 0.5) continue;
+            return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.4 ? 'dark' : r > g ? 'rose' : 'mint';
+          }
+          return 'mint';
+        };
+        const look = (t: Element | null) => {
+          if (!t || t === last) return;
+          last = t;
+          const mode = t.closest('.orbit.on') ? 'drag' : t.closest('a, button, summary, label') ? 'link' : '';
+          if ((root.dataset.cur ?? '') !== mode) root.dataset.cur = mode;
+          const on = surface(t);
+          if (root.dataset.on !== on) root.dataset.on = on;
+        };
         const follow = () => {
           bx += (x - bx) * 0.18; by += (y - by) * 0.18;
           ball.style.transform = `translate(${bx.toFixed(1)}px, ${by.toFixed(1)}px)`;
@@ -120,10 +137,10 @@ const nav = [
           if (root.classList.contains('cur-off')) { bx = x; by = y; root.classList.remove('cur-off'); }
           dot.style.transform = `translate(${x}px, ${y}px)`;
           if (still) { bx = x; by = y; ball.style.transform = dot.style.transform; } else if (!raf) raf = requestAnimationFrame(follow);
-          const t = e.target as Element;
-          const mode = t.closest('.orbit.on') ? 'drag' : t.closest('a, button, summary, label') ? 'link' : '';
-          if ((root.dataset.cur ?? '') !== mode) root.dataset.cur = mode;
+          look(e.target as Element);
         }, { passive: true });
+        // Сторінка їде під нерухомою мишею: поверхня під кулею теж змінюється
+        addEventListener('scroll', () => { if (!root.classList.contains('cur-off')) look(document.elementFromPoint(x, y)); }, { passive: true });
         root.addEventListener('mouseleave', () => root.classList.add('cur-off'));
       }
     </script>
