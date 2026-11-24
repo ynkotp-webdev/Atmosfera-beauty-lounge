@@ -2,6 +2,9 @@
 
 Концепт для портфолио YonkaAgency: салон «Атмосфера», Львов, две точки. Astro + Tailwind 4, статика.
 Сайт на украинском, общение с Остапом на русском. Запуск dev-сервера описан в `AGENTS.md`.
+Деплой: push в `main` → GitHub Actions → https://ynkotp-webdev.github.io/Atmosfera-beauty-lounge/. Сайт в подпапке
+(`base` в `astro.config.mjs`), поэтому внутренние ссылки только через `to()` из `src/data/salon.ts`. Из `content/`
+в git попадает лишь `bloknot/services.json`, его читает сборка.
 Задание на сборку сайта лежит в `BRIEF.md`: решения Остапа, страницы, фото, единственный стоп.
 
 ## Дизайн и вёрстка
