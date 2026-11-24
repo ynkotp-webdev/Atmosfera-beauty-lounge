@@ -58,7 +58,7 @@ const [lv, nb] = places;
     // Без JS усі аркуші відкриті. На телефоні згортаємо всі, крім першого і того, на який прийшли за якорем.
     (() => {
       const all = [...document.querySelectorAll('details.ps')];
-      const el = () => location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      const el = () => (location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)))) || null;
       if (matchMedia('(max-width: 900px)').matches) { const keep = el()?.closest('details.ps') || all[0]; all.forEach((d) => (d.open = d === keep)); el()?.scrollIntoView(); }
       addEventListener('hashchange', () => { const d = el()?.closest('details.ps'); if (d) { d.open = true; el().scrollIntoView(); } });
     })();
