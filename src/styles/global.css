@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import "@fontsource/tenor-sans/400.css";
+@import "@fontsource-variable/ysabeau-office";
+
+@theme {
+  /* Кольори зняті з матеріалів салону, не з брендбука (його немає) */
+  --color-mint: #c8e2d9; /* світла м'ята акварелі з сітки-банера: «стіл», на якому лежить усе */
+  --color-sage: #8fa89f; /* середній тон тієї ж акварелі */
+  --color-rose: #e3d2ce; /* пудра вордмарка і крісел: аркуші прайсу, нотатки з відгуками */
+  --color-wall: #16201a; /* темно-зелена стіна ресепшну й візитка салону: текст і темні картки */
+  --color-moss: #3d5a55; /* другорядний текст на м'яті, 5.49:1 */
+  --color-clay: #5c4a46; /* другорядний текст на пудрі, 5.70:1 */
+  --color-blush: #d9c2bc; /* другорядний текст на темній картці, 9.87:1 */
+  --font-display: "Tenor Sans", "Trebuchet MS", sans-serif;
+  --font-sans: "Ysabeau Office Variable", system-ui, sans-serif;
+}
+
+:root {
+  --gut: clamp(1rem, 3.4vw, 3rem);
+  --gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  --block: clamp(4.5rem, 9vw, 8.5rem); /* відстань між розділами */
+  --pad: clamp(1.25rem, 2.6vw, 2.5rem); /* поля всередині картки чи аркуша */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Шкала кеглів. Tenor Sans: d1–d4. Ysabeau Office: lead, body, small, label. Інших розмірів на сайті немає */
+  --d1: clamp(2.25rem, 5vw, 4.5rem);
+  --d2: clamp(2rem, 3.6vw, 3.25rem);
+  --d3: clamp(1.5rem, 2.2vw, 2rem);
+  --d4: clamp(1.25rem, 1.55vw, 1.4375rem);
+  --t-lead: 1.3125rem;
+  --t-body: 1.125rem;
+  --t-small: 1rem;
+  --t-label: 0.875rem;
+}
+
+html {
+  background: var(--color-mint);
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--color-sage) var(--color-mint);
+  scroll-padding-top: 1.5rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+body {
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  color: var(--color-wall);
+  background: var(--color-mint);
+  overflow-x: clip;
+  font-variant-numeric: lining-nums;
+  --mute: var(--color-moss);
+}
+::selection { background: var(--color-wall); color: var(--color-mint); }
+:focus-visible { outline: 2px solid var(--focus, var(--color-wall)); outline-offset: 4px; }
+
+/* Речі на столі. Візитка (темна), аркуш (пудра). Прямі кути, без тіней і рамок: глибину дає накладання */
+.card { background: var(--color-wall); color: var(--color-mint); --mute: var(--color-blush); --focus: var(--color-blush); padding: var(--pad); }
+.card ::selection { background: var(--color-rose); color: var(--color-wall); }
+.sheet { background: var(--color-rose); color: var(--color-wall); --mute: var(--color-clay); padding: var(--pad); }
+
+.wrap { padding-inline: var(--gut); }
+.grid12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+
+/* Заголовний голос: Tenor Sans, одна вага */
+.disp { font-family: var(--font-display); font-weight: 400; line-height: 1.04; letter-spacing: -0.012em; }
+.h1 { font-size: var(--d1); text-wrap: balance; }
+.h2 { font-size: var(--d2); text-wrap: balance; }
+.h3 { font-size: var(--d3); line-height: 1.1; }
+.h4 { font-size: var(--d4); line-height: 1.2; letter-spacing: 0; }
+.lead { font-size: var(--t-lead); line-height: 1.4; }
+.small { font-size: var(--t-small); line-height: 1.4; }
+.label { font-size: var(--t-label); line-height: 1.35; }
+.mute { color: var(--mute); }
+.nowrap { white-space: nowrap; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+p, li, dd, blockquote { text-wrap: pretty; }
+img { display: block; max-width: 100%; }
+address { font-style: normal; }
+
+/* Куля: запис. Єдина форма кнопки запису на сайті, як світильники-кулі й кругле дзеркало в залі */
+.sphere {
+  display: grid; place-items: center; text-align: center;
+  width: var(--sphere, 8.5rem); aspect-ratio: 1; border-radius: 50%;
+  background: var(--sphere-bg, var(--color-rose)); color: var(--sphere-fg, var(--color-wall));
+  font-weight: 600; line-height: 1.15;
+  transition: transform 0.35s var(--ease-out);
+}
+@media (prefers-reduced-motion: no-preference) { .sphere:hover { transform: scale(1.05); } }
+/* Текстова дія: маршрут, перехід, запис на конкретну адресу всередині картки */
+.go {
+  display: inline-flex; align-items: center; gap: 0.4em; min-height: 2.75rem; font-weight: 600;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.35em;
+}
+.go:hover { text-decoration-thickness: 2px; }
+.tap { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.under { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.25em; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
+.under:hover { text-decoration-color: currentColor; }
+
+/* Слова клієнтки: під ними ім'я, джерело й адреса посиланням на відгуки. Поле натиску 44px без зсуву верстки */
+.said footer { margin-top: 0.6rem; font-size: var(--t-label); line-height: 1.35; color: var(--mute); }
+.said footer a { display: inline-block; padding-block: 0.8rem; margin-block: -0.8rem; }
+.said > .stars { display: block; margin-bottom: 0.75rem; }
+
+.stars { display: inline-block; position: relative; width: 5em; height: 1em; vertical-align: -0.12em; }
+.stars svg { position: absolute; inset: 0; width: 5em; height: 1em; }
+.stars .fill { clip-path: inset(0 calc(100% - var(--pct)) 0 0); }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

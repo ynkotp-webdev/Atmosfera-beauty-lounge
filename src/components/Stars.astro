@@ -1,0 +1,11 @@
+---
+// Справжні зірки рейтингу: п'ять контурів, залито стільки, скільки оцінка (4,6 це 92 %)
+interface Props { value: number }
+const { value } = Astro.props;
+const star = 'M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z';
+const row = [0, 20, 40, 60, 80].map((x) => `<path transform="translate(${x})" d="${star}"/>`).join('');
+---
+<span class="stars" style={`--pct:${(value / 5) * 100}%`} role="img" aria-label={`${String(value).replace('.', ',')} з 5`}>
+  <svg viewBox="0 0 100 20" fill="currentColor" opacity="0.28" set:html={row} />
+  <svg class="fill" viewBox="0 0 100 20" fill="currentColor" set:html={row} />
+</span>

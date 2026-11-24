@@ -1,0 +1,533 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import Stars from '../components/Stars.astro';
+import Said from '../components/Said.astro';
+import { salon, places, uah, rate, to } from '../data/salon';
+import { directions, p } from '../data/prices';
+import { team, leaders } from '../data/team';
+import { q } from '../data/reviews';
+import hall from '../assets/photos/hair-zone.jpg';
+import watercolor from '../assets/photos/watercolor.jpg';
+import pedRoom from '../assets/photos/pedicure-room.jpg';
+import nailbar from '../assets/photos/nailbar.jpg';
+import reception from '../assets/photos/reception-2021.jpg';
+import pedicure from '../assets/photos/pedicure-lemonade.jpg';
+import wCurls from '../assets/photos/work-curls.jpg';
+import wNails from '../assets/photos/work-nails.jpg';
+import wBlonde from '../assets/photos/work-blonde.jpg';
+import wRed from '../assets/photos/work-red.jpg';
+import wBrows from '../assets/photos/work-brows.jpg';
+import wMakeup from '../assets/photos/work-makeup.jpg';
+import wBob from '../assets/photos/work-bob.jpg';
+import wWhite from '../assets/photos/work-nails-white.jpg';
+import emerald from '../assets/photos/work-emerald.jpg';
+import rCoffee from '../assets/reviews/dakal.jpg';
+import rFrench from '../assets/reviews/marynska-1.jpg';
+import rGlitter from '../assets/reviews/palenha.jpg';
+
+const spots = [
+  { pl: places[0], cls: 'lv', box: 'card', pic: pedRoom, alt: 'Зал педикюру на Шевченка, 17 за скляною перегородкою: пудрові крісла, шпалери з листям, зелень', services: 'нігті, подологія, волосся, брови та вії, макіяж, шугаринг', cut: p.haircut.l!, mani: p.manicure.l!, quote: q.allInOne },
+  { pl: places[1], cls: 'nb', box: 'sheet', pic: nailbar, alt: 'Зал на Залізничній, 9 перед відкриттям: рожеві крісла, чорні металеві стелажі з лаками, темно-зелена стіна', services: 'нігті, волосся, брови та вії, макіяж', cut: p.haircut.n!, mani: p.manicure.n!, quote: q.name },
+];
+// Кільце «Роботи»: волосся й нігті чергуються. Більшість кадрів з каруселі салону від 03.02.2025, брови й червоний манікюр з постів 2022–2023
+const works = [
+  { src: wCurls, alt: 'Довге волосся з локонами, фарбування блонд, на тлі стіни з логотипом Atmosfera' },
+  { src: wNails, alt: 'Манікюр кольору темного шоколаду на коротких нігтях' },
+  { src: wBrows, alt: 'Брови після корекції й фарбування, крупний план' },
+  { src: wBlonde, alt: 'Холодний блонд, хвилі нижче лопаток, на тлі логотипа Atmosfera' },
+  { src: wRed, alt: 'Червоний манікюр на коротких квадратних нігтях' },
+  { src: wMakeup, alt: 'Макіяж і укладка локонами, дівчина біля стіни з логотипом Atmosfera' },
+  { src: wBob, alt: 'Платинове каре, вигляд зі спини' },
+  { src: wWhite, alt: 'Білий манікюр на мигдалеподібних нігтях із тонкою золотою лінією' },
+];
+// Відгуки з фото, які клієнтки самі додали в Google
+const shots = [
+  { pic: rCoffee, q: q.podology, alt: 'Фото з відгуку: кава в склянці й цукерки на дерев’яній таці, поруч меню напоїв салону' },
+  { pic: rFrench, q: q.masha, alt: 'Фото з відгуку: манікюр з тонким бордовим френчем' },
+  { pic: rGlitter, q: q.olena, alt: 'Фото з відгуку: мигдалеподібні нігті з рожево-срібним глітером, на пальцях срібні каблучки' },
+];
+const mastersOf = (cats: string[]) => team.filter((m) => m.cats.some((c) => cats.includes(c)));
+const ratings = places.map((pl) => ({
+  place: pl.short,
+  cells: [
+    { src: 'Google', r: pl.google.rating, n: pl.google.reviews, url: pl.google.url },
+    { src: 'Bloknot', r: pl.bloknot.rating, n: pl.bloknot.reviews, url: pl.booking },
+  ],
+}));
+const price = (v: number | undefined, addon?: boolean) => (v == null ? '—' : `${addon ? '+ ' : ''}${uah(v)}`);
+---
+<Base home title="Атмосфера: салон краси у Львові, Шевченка, 17 і Залізнична, 9" description={`Салон краси Атмосфера у Львові: манікюр і педикюр, подологія, стрижки й фарбування, брови та вії, макіяж. Дві адреси, онлайн-запис і відкриті ціни.`}>
+  <!-- Перший екран: слово розбите як на візитці салону -->
+  <section class="hero">
+    <Image src={watercolor} alt="" widths={[640, 1100, 1600]} sizes="(max-width: 720px) 130vw, 58vw" class="wash" loading="eager" />
+    <div class="atmo"><Wordmark part="atmo" gold /></div>
+    <Image src={hall} alt="Зал перукарів у салоні Атмосфера: пудрові крісла, арочні дзеркала, темно-зелена стіна" widths={[520, 800, 1100, 1600]} sizes="(max-width: 720px) 62vw, 33vw" class="shot" loading="eager" fetchpriority="high" />
+    <div class="sfera"><Wordmark part="sfera" gold /></div>
+    <div class="say">
+      <h1 class="disp hero-h">Салон краси<br />у Львові</h1>
+      <p class="lead">Твоя beauty сфера на Шевченка, 17 і Залізничній, 9. Нігті, волосся, брови, макіяж, подологія.</p>
+      <a class="sphere cta" href={salon.booking} target="_blank" rel="noopener">Записатися</a>
+    </div>
+  </section>
+
+  <!-- Дві адреси: дві «візитки» по діагоналі, кожна лежить на своєму кадрі -->
+  <section class="two wrap" id="adresy">
+    {spots.map((s, i) => (
+      <article class:list={['spot grid12', s.cls]}>
+        <Image src={s.pic} alt={s.alt} widths={[420, 640, 900, 1100]} sizes="(max-width: 720px) 100vw, 40vw" class="print" />
+        <div class:list={['info', s.box]}>
+          <h3 class="disp h2">{s.pl.short}</h3>
+          <p class="mute small">{s.pl.name}, {s.pl.since}</p>
+          <dl class="facts">
+            <div class="full"><dt class="mute small">Послуги</dt><dd>{s.services}</dd></div>
+            <div><dt class="mute small">Стрижка жіноча</dt><dd class="num">{uah(s.cut)}</dd></div>
+            <div><dt class="mute small">Манікюр із покриттям</dt><dd class="num">{uah(s.mani)}</dd></div>
+            <div class="full"><dt class="mute small">Години</dt><dd class="num">{salon.hours.map((h, j) => (<>{j > 0 && ', '}<span class="nowrap">{h.days} {h.time}</span></>))}</dd></div>
+          </dl>
+          <address>
+            <a class="under tap num" href={s.pl.phone.href}>{s.pl.phone.text}</a>
+            <a class="under tap" href={s.pl.route} target="_blank" rel="noopener">Маршрут</a>
+            <a class="go" href={s.pl.booking} target="_blank" rel="noopener">Записатися {s.pl.to}</a>
+          </address>
+        </div>
+        {i === 0 && (
+          <div class="two-head">
+            <h2 class="disp h2">Дві адреси</h2>
+            <p class="intro">Одна Атмосфера у двох місцях Львова. На Шевченка є всі послуги, разом із подологією. На Залізничній послуг менше, а манікюр, стрижка й фарбування дешевші.</p>
+          </div>
+        )}
+        <div class="aside">
+          <Said q={s.quote} />
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- У залі: кадри й нотатки з відгуками впереміш -->
+  <section class="room wrap grid12">
+    <Image src={reception} alt="Ресепшн салону на Шевченка, 17: вивіска Atmosfera Beauty Lounge на темно-зеленій стіні, кругле дзеркало, стелаж із зеленню, оливковий диван" widths={[640, 900, 1300, 1700]} sizes="(max-width: 720px) 100vw, 57vw" class="print r-main" />
+    <h2 class="disp h2 r-h">У залі</h2>
+    <Said q={q.cozy} class="sheet note n1" text="disp h4" />
+    <Said q={q.clean} class="n2" />
+    <Said q={q.coffee} class="card note n3" text="disp h4" />
+    <Image src={pedicure} alt="Келих лимонаду на столику в залі педикюру, за ним клієнтка в кріслі" widths={[420, 640, 900, 1100]} sizes="(max-width: 720px) 72vw, 32vw" class="print r-side" />
+  </section>
+
+  <!-- Послуги: аркуш прайсу. Один напрям розкритий, решта відкриваються на місці, без JS -->
+  <section class="serv wrap">
+    <div class="sheet menu">
+      <div class="menu-head">
+        <h2 class="disp h2">Послуги</h2>
+        <p class="mute">Тут головне з прайсу, повний список на сторінці цін.</p>
+        <a class="go" href={to('/tsiny')}>Усі ціни обох адрес</a>
+      </div>
+      <Image src={emerald} alt="Смарагдовий манікюр на коротких нігтях" widths={[360, 560, 800]} sizes="32vw" class="print menu-pic" />
+      <div class="dirs">
+        {directions.map((d, i) => (
+          <details class="dir" name="dir" open={i === 0}>
+            <summary>
+              <h3 class="disp h3">{d.title}</h3>
+              <span class="small num from">від {uah(d.from)}</span>
+            </summary>
+            <div class="in">
+              <table>
+                <thead>
+                  <tr><th scope="col"><span class="sr">Послуга</span></th><th scope="col" class="pc">Шевченка</th><th scope="col" class="pc">Залізнична</th></tr>
+                </thead>
+                <tbody>
+                  {d.rows.map((r) => (
+                    <tr>
+                      <th scope="row">{r.label}{r.incl && <small>{r.incl}</small>}</th>
+                      <td class="pc num">{price(r.l, r.addon)}</td>
+                      <td class="pc num">{price(r.n, r.addon)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div class="more">
+                {d.note && <p>{d.note}</p>}
+                {mastersOf(d.cats).length > 0 && (
+                  <p><span class="mute small">Майстри</span><br />{mastersOf(d.cats).map((m, j) => (<>{j > 0 && ', '}<a class="under" href={to(`/komanda#${m.id}`)}>{m.name}</a></>))}</p>
+                )}
+                <a class="go" href={d.href}>Усі ціни: {d.title.toLowerCase()}</a>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Роботи: кадри по колу, як орбіта. Тягнеш мишею чи пальцем, кінця немає. Без JS це звичайна стрічка з прокруткою -->
+  <section class="works">
+    <div class="wrap works-head">
+      <h2 class="disp h2">Роботи</h2>
+      <p class="mute small hint">Тягни вбік</p>
+      <a class="go" href={salon.instagram} target="_blank" rel="noopener">Більше в Instagram</a>
+    </div>
+    <div class="orbit" data-orbit tabindex="0" role="region" aria-roledescription="карусель" aria-label="Роботи майстрів. Тягни вбік або гортай стрілками">
+      <ul>
+        {works.map((w) => <li><Image src={w.src} alt={w.alt} widths={[360, 560, 800]} sizes="(max-width: 720px) 62vw, 26vw" class="frame" draggable="false" /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Майстри: двоє з портретами, слова клієнток нотаткою на краю кадру; ще двоє рядками -->
+  <section class="masters wrap grid12">
+    <div class="m-head">
+      <h2 class="disp h2">Майстри</h2>
+      <p class="intro">Цих чотирьох у відгуках називають найчастіше. Усього в команді одинадцять майстрів.</p>
+      <a class="card all disp h4" href={to('/komanda')}>Уся команда</a>
+    </div>
+    {leaders.slice(0, 2).map((m, i) => (
+      <article class={`feat f${i + 1}`}>
+        <Image src={m.photo!} alt={`${m.name}, ${m.role.toLowerCase()}`} widths={[360, 560, 800, 928]} sizes="(max-width: 720px) 62vw, 24vw" class="print" />
+        <div class="who">
+          <h3 class="disp h3">{m.name}</h3>
+          <p class="mute small">{m.role} · {m.where}</p>
+        </div>
+        <Said q={m.home!} class={`note ${i === 0 ? 'sheet' : 'card'}`} text="disp h4" />
+      </article>
+    ))}
+    {leaders.slice(2).map((m, i) => (
+      <article class={`line l${i + 1}`}>
+        <h3 class="disp h3">{m.name}</h3>
+        <p class="mute small">{m.role} · {m.where}</p>
+        <Said q={m.home!} />
+      </article>
+    ))}
+  </section>
+
+  <!-- Відгуки: оцінки двох адрес на двох майданчиках, поруч слова клієнток -->
+  <section class="revs wrap grid12">
+    <div class="rate-box">
+      <h2 class="disp h2">Відгуки</h2>
+      <table class="rates">
+        <thead>
+          <tr><th scope="col"><span class="sr">Адреса</span></th><th scope="col">Google</th><th scope="col">Bloknot</th></tr>
+        </thead>
+        <tbody>
+          {ratings.map((r) => (
+            <tr>
+              <th scope="row">{r.place}</th>
+              {r.cells.map((c) => (
+                <td data-src={c.src}>
+                  <a href={c.url} data-src={c.src} target="_blank" rel="noopener">
+                    <strong class="num">{rate(c.r)}</strong> <Stars value={c.r} />
+                    <span class="under num small">{c.n.toLocaleString('uk-UA')} відгуків</span>
+                  </a>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="label mute">За посиланнями всі відгуки, без відбору.</p>
+    </div>
+    <Said q={q.years} class="v1" text="disp h3" stars />
+    {shots.map((r, i) => (
+      <figure class={`snap s${i + 1}`}>
+        <Image src={r.pic} alt={r.alt} widths={[320, 480, 720, 900]} sizes="(max-width: 720px) 80vw, 28vw" class="print" />
+        <figcaption><Said q={r.q} stars /></figcaption>
+      </figure>
+    ))}
+  </section>
+</Base>
+
+<script>
+  // Орбіта «Робіт»: кадр i стоїть під кутом (i − pos) · STEP на еліпсі. Ближній кадр великий, дальні менші й вище,
+  // задня половина кола схована, тому кадр переходить з кінця на початок непомітно і кільце не має країв
+  const el = document.querySelector<HTMLElement>('[data-orbit]');
+  if (el) {
+    const items = [...el.querySelectorAll('li')];
+    const n = items.length, STEP = 0.5;
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
+    let pos = 0, target = 0, R = 0, RY = 0, raf = 0, snapT = 0, dragged = false;
+    let drag: { x: number; from: number; t: number; v: number; moved: boolean; id: number } | null = null;
+    const wrap = (d: number) => d - n * Math.round(d / n); // відстань від центру по колу, від −n/2 до n/2
+    const perStep = () => R * Math.sin(STEP); // стільки пікселів тягнути, щоб зсунути на один кадр
+
+    const draw = () => items.forEach((li, i) => {
+      const a = wrap(i - pos) * STEP, z = Math.cos(a);
+      li.style.transform = `translate(-50%, -50%) translate3d(${(Math.sin(a) * R).toFixed(1)}px, ${((z - 1) * RY).toFixed(1)}px, 0) scale(${(0.5 + 0.5 * z).toFixed(3)})`;
+      li.style.zIndex = String(Math.round(z * 100) + 100);
+      li.style.opacity = String(Math.min(1, Math.max(0, (z + 0.1) / 0.4)));
+      li.style.visibility = z < -0.1 ? 'hidden' : '';
+    });
+    const tick = () => {
+      pos += (target - pos) * 0.14;
+      if (Math.abs(target - pos) < 0.002) pos = target;
+      draw();
+      raf = pos === target ? 0 : requestAnimationFrame(tick);
+    };
+    const go = (t: number) => {
+      target = t;
+      if (still.matches) { pos = t; draw(); }
+      else if (!raf) raf = requestAnimationFrame(tick);
+    };
+    // R: піврадіус орбіти по горизонталі, RY: наскільки дальні кадри піднімаються, від висоти кадру
+    const size = () => { const w = el.clientWidth; R = Math.min(w * (w < 720 ? 0.6 : 0.44), 640); RY = (items[0].offsetHeight || 300) * 0.36; draw(); };
+
+    el.classList.add('on');
+    new ResizeObserver(size).observe(el);
+
+    el.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      cancelAnimationFrame(raf); raf = 0; target = pos;
+      drag = { x: e.clientX, from: pos, t: e.timeStamp, v: 0, moved: false, id: e.pointerId };
+    });
+    el.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved) {
+        if (Math.abs(dx) < 6) return;
+        drag.moved = true; el.setPointerCapture(drag.id); el.classList.add('grab');
+      }
+      const p = drag.from - dx / perStep();
+      drag.v = (p - pos) / Math.max(e.timeStamp - drag.t, 1); drag.t = e.timeStamp;
+      pos = target = p; draw();
+    });
+    const end = () => {
+      if (!drag) return;
+      dragged = drag.moved;
+      // кидок: що швидше відпустила, то далі прокрутиться, але не більше ніж на два кадри
+      if (drag.moved) go(Math.round(pos + Math.max(-2, Math.min(2, drag.v * 160))));
+      drag = null; el.classList.remove('grab');
+    };
+    el.addEventListener('pointerup', end);
+    el.addEventListener('pointercancel', end);
+    // Клік по бічному кадру підвозить його в центр
+    el.addEventListener('click', (e) => {
+      if (dragged) { dragged = false; return; }
+      const li = (e.target as Element).closest('li');
+      if (li) go(Math.round(pos + wrap(items.indexOf(li) - pos)));
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault(); go(target + (e.key === 'ArrowRight' ? 1 : -1));
+    });
+    // Тачпад: горизонтальний свайп двома пальцями крутить кільце, вертикальний гортає сторінку
+    el.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault(); cancelAnimationFrame(raf); raf = 0;
+      pos = target = pos + e.deltaX / perStep(); draw();
+      clearTimeout(snapT); snapT = window.setTimeout(() => go(Math.round(pos)), 140);
+    }, { passive: false });
+  }
+</script>
+
+<style>
+  .print { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .note { --pad: clamp(1.1rem, 1.8vw, 1.6rem); position: relative; z-index: 2; }
+  .intro { margin-top: 1rem; }
+
+  /* Перший екран */
+  .hero { position: relative; height: max(100svh, 40rem); padding: 0 var(--gut); overflow: clip; --cap: clamp(4.5rem, 12.4vw, 11.5rem); }
+  .atmo, .sfera { position: absolute; z-index: 2; }
+  .atmo { width: calc(var(--cap) * 2971 / 718); left: var(--gut); top: 5.75rem; }
+  .sfera { width: calc(var(--cap) * 3228 / 718); right: var(--gut); bottom: 3.5rem; }
+  .wash { position: absolute; z-index: 1; width: 58vw; height: auto; left: 24vw; top: 9vh; mix-blend-mode: multiply; pointer-events: none; mask-image: radial-gradient(closest-side, var(--color-wall) 72%, transparent 98%); }
+  .shot { position: absolute; z-index: 1; left: var(--gut); top: calc(5.75rem + var(--cap) + 3.75rem); width: 33vw; aspect-ratio: 4 / 5; height: auto; object-fit: cover; }
+  .say { position: absolute; z-index: 3; left: 60vw; right: var(--gut); top: 6.5rem; }
+  .hero-h { font-size: var(--d1); }
+  .say .lead { margin-top: 1rem; max-width: 26rem; }
+  .cta { margin-top: 1.75rem; --sphere: 9rem; font-size: var(--t-lead); }
+
+  /* Дві адреси */
+  .two { padding-top: var(--block); display: grid; row-gap: clamp(3rem, 6vw, 5.5rem); }
+  .spot { align-items: start; }
+  .info { position: relative; z-index: 2; display: grid; gap: 1.5rem; }
+  .info .mute.small { margin-top: -1rem; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem var(--gap); }
+  .facts dt { margin-bottom: 0.1rem; }
+  .facts .full { grid-column: 1 / -1; }
+  .facts dd { font-size: var(--t-lead); line-height: 1.3; }
+  .info address { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.75rem; }
+  .info address .go { flex-basis: 100%; }
+  .aside { align-self: end; padding-bottom: 1rem; }
+  .two-head { grid-column: 6 / span 5; grid-row: 1; align-self: start; }
+  .lv .print { grid-column: 1 / span 5; grid-row: 1; }
+  .lv .info { grid-column: 5 / span 5; grid-row: 1; align-self: end; margin-bottom: -3.5rem; }
+  .lv .aside { grid-column: 10 / span 3; grid-row: 1; padding-bottom: 0; margin-bottom: -2.5rem; }
+  .nb .aside { grid-column: 1 / span 3; grid-row: 1; }
+  .nb .info { grid-column: 4 / span 5; grid-row: 1; margin-top: 3.5rem; }
+  .nb .print { grid-column: 8 / span 5; grid-row: 1; }
+
+  /* У залі */
+  .room { padding-top: calc(var(--block) + 2rem); align-items: start; }
+  .r-main { grid-column: 1 / span 7; grid-row: 1 / span 2; aspect-ratio: 5 / 4; object-position: 50% 30%; }
+  .r-h { grid-column: 9 / span 4; grid-row: 1; padding-bottom: 1.5rem; }
+  .r-side { grid-column: 9 / span 4; grid-row: 2; }
+  .n1 { grid-column: 5 / span 4; grid-row: 2; align-self: end; margin-bottom: -2.5rem; }
+  .n2 { grid-column: 1 / span 4; grid-row: 3; margin-top: 4.5rem; }
+  .n3 { grid-column: 9 / span 4; grid-row: 3; margin: -2rem 2.5rem 0 0; }
+
+  /* Послуги */
+  .serv { padding-top: var(--block); }
+  .menu { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr; column-gap: var(--gap); padding-block: clamp(2rem, 4vw, 3.5rem); }
+  .menu-head { grid-column: 1 / span 4; grid-row: 1; display: grid; gap: 1rem; align-content: start; justify-items: start; }
+  .menu-head p { max-width: 22rem; }
+  .menu-pic { grid-column: 1 / span 4; grid-row: 2; align-self: end; margin-top: 2.5rem; }
+  .dirs { grid-column: 6 / span 7; grid-row: 1 / span 2; }
+  .dir summary { display: flex; align-items: baseline; gap: 1rem; min-height: 3.5rem; padding-block: 0.4rem; cursor: pointer; list-style: none; }
+  .dir summary::-webkit-details-marker { display: none; }
+  .dir .from { margin-left: auto; color: var(--mute); white-space: nowrap; }
+  .dir summary::before { content: ''; flex: none; align-self: center; width: 0.8rem; height: 0.8rem; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--color-wall); }
+  .dir[open] summary::before { background: var(--color-wall); }
+  .dir summary:hover h3 { opacity: 0.62; }
+  .in { background: var(--color-mint); --mute: var(--color-moss); padding: 1.25rem 1.5rem 0.75rem; margin: 0.25rem 0 1rem; display: grid; grid-template-columns: 7fr 4fr; column-gap: 2rem; }
+  .in table { width: 100%; border-collapse: collapse; align-self: start; }
+  .in thead th { font-weight: 400; font-size: var(--t-label); color: var(--mute); text-align: left; padding-bottom: 0.3rem; }
+  .in tbody th { font-weight: 400; text-align: left; padding: 0.4rem 0.75rem 0.4rem 0; vertical-align: top; line-height: 1.3; }
+  .in tbody td { padding: 0.4rem 0; vertical-align: top; font-weight: 600; }
+  .in small { display: block; font-size: var(--t-label); color: var(--mute); }
+  .pc, .in thead .pc { width: 6.25rem; text-align: right; white-space: nowrap; }
+  .more { display: grid; gap: 0.75rem; align-content: start; justify-items: start; }
+
+  /* Роботи */
+  .works { padding-top: var(--block); }
+  .works-head { display: flex; align-items: baseline; gap: 0.5rem 2rem; flex-wrap: wrap; }
+  .hint { display: none; }
+  .orbit { --fh: clamp(19rem, 34vw, 30rem); }
+  /* Без JS: стрічка з прокруткою */
+  .orbit ul { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x proximity; padding: clamp(1.5rem, 3vw, 2.5rem) var(--gut) 1.25rem; scrollbar-color: var(--color-sage) transparent; scrollbar-width: thin; }
+  .orbit li { flex: none; scroll-snap-align: start; scroll-margin-left: var(--gut); }
+  .frame { width: auto; height: var(--fh); aspect-ratio: 4 / 5; object-fit: cover; }
+  /* З JS: кадри стоять на еліпсі, скрипт крутить кільце */
+  .orbit.on { position: relative; height: calc(var(--fh) * 1.2); margin-top: clamp(1rem, 2.5vw, 2rem); overflow: clip; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+  .orbit.on.grab { cursor: grabbing; }
+  .orbit.on ul { display: block; height: 100%; padding: 0; overflow: visible; }
+  .orbit.on li { position: absolute; left: 50%; top: calc(100% - var(--fh) / 2); will-change: transform, opacity; }
+  .orbit.on .frame { pointer-events: none; }
+  .works:has(.orbit.on) .hint { display: block; }
+
+  /* Майстри */
+  .masters { padding-top: var(--block); row-gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
+  .m-head { grid-column: 1 / span 3; grid-row: 1; display: grid; justify-items: start; }
+  .all { margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 0.75em; min-height: 3.5rem; padding: 0.75rem 1.4rem; }
+  .all::after { content: '→'; font-family: var(--font-sans); transition: transform 0.35s var(--ease-out); }
+  .all:hover::after { transform: translateX(0.3em); }
+  .feat { display: grid; column-gap: var(--gap); align-items: start; }
+  .feat .print { object-position: 50% 18%; }
+  .feat .who .mute { margin-top: 0.4rem; }
+  .f1 { grid-column: 4 / span 5; grid-row: 1; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .f1 .print { grid-column: 1 / span 3; grid-row: 1 / span 2; }
+  .f1 .who { grid-column: 4 / span 2; grid-row: 1; }
+  .f1 .note { grid-column: 3 / span 3; grid-row: 2; align-self: end; margin-bottom: -2rem; }
+  .f2 { grid-column: 9 / span 4; grid-row: 1; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: clamp(5rem, 10vw, 9rem); }
+  .f2 .who { grid-column: 2 / span 3; grid-row: 1; margin-bottom: 1rem; }
+  .f2 .print { grid-column: 2 / span 3; grid-row: 2; }
+  .f2 .note { grid-column: 1 / span 3; grid-row: 2; align-self: end; margin: 0 0 -2rem -1.5rem; }
+  .line { grid-row: 2; display: grid; gap: 0.25rem; }
+  .line .said { margin-top: 0.75rem; }
+  .l1 { grid-column: 1 / span 4; }
+  .l2 { grid-column: 5 / span 4; }
+
+  /* Відгуки */
+  .revs { padding-top: var(--block); align-items: start; row-gap: var(--gap); }
+  .rate-box { grid-column: 1 / span 5; grid-row: 1; }
+  .rates { margin-top: clamp(1.5rem, 3vw, 2.5rem); border-collapse: collapse; }
+  .rates thead th { font-weight: 400; font-size: var(--t-small); color: var(--mute); text-align: left; padding: 0 2rem 0.25rem 0; }
+  .rates tbody th { font-family: var(--font-display); font-weight: 400; font-size: var(--d4); text-align: left; padding: 0.5rem 2rem 0.5rem 0; white-space: nowrap; }
+  .rates td { padding: 0.5rem 2rem 0.5rem 0; }
+  .rates td a { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: center; gap: 0 0.6rem; min-height: 2.75rem; font-size: var(--t-lead); }
+  .rates td a .under { grid-column: 1 / -1; }
+  .rates strong { font-weight: 600; }
+  .rate-box > p { margin-top: 1.25rem; max-width: 34rem; }
+  .v1 { grid-column: 7 / span 6; grid-row: 1; }
+  .v1 :global(.stars) { font-size: var(--t-lead); }
+  /* Відгуки з фото: три кадри різної ширини, сходинками */
+  .snap { grid-row: 2; margin-top: clamp(3rem, 6vw, 5rem); }
+  .snap figcaption { margin-top: 1rem; max-width: 26rem; }
+  .s1 { grid-column: 1 / span 4; }
+  .s2 { grid-column: 6 / span 3; margin-top: clamp(6rem, 12vw, 11rem); }
+  .s3 { grid-column: 10 / span 3; margin-top: clamp(4rem, 8vw, 7rem); }
+
+  @media (max-width: 1000px) {
+    .lv .print { grid-column: 1 / span 6; }
+    .lv .info { grid-column: 5 / span 8; margin-bottom: 0; margin-top: -6rem; grid-row: 2; align-self: start; }
+    .two-head { grid-column: 7 / span 6; }
+    .lv .aside { grid-column: 1 / span 4; grid-row: 2; align-self: start; margin: 2rem 0 0; }
+    .nb .aside { grid-column: 9 / span 4; grid-row: 2; align-self: start; margin-top: 2rem; }
+    .nb .print { grid-column: 7 / span 6; }
+    .nb .info { grid-column: 1 / span 8; grid-row: 2; margin-top: -6rem; }
+    .menu-head { grid-column: 1 / -1; margin-bottom: 1.5rem; }
+    .dirs { grid-column: 1 / -1; grid-row: 2; }
+    .menu-pic { display: none; }
+    .m-head { grid-column: 1 / -1; }
+    .f1 { grid-column: 1 / span 6; grid-row: 2; }
+    .f2 { grid-column: 8 / span 5; grid-row: 2; }
+    .line { grid-row: 3; }
+    .l1 { grid-column: 1 / span 6; }
+    .l2 { grid-column: 7 / span 6; }
+    .rate-box { grid-column: 1 / -1; grid-row: auto; }
+    .v1 { grid-column: 1 / -1; grid-row: auto; margin-top: 1.5rem; }
+    .s1 { grid-column: 1 / span 5; }
+    .s2 { grid-column: 7 / span 6; margin-top: 7rem; }
+    .s3 { grid-column: 3 / span 6; grid-row: 3; margin-top: 3rem; }
+  }
+
+  @media (max-width: 720px) {
+    .hero { height: auto; padding-top: 3.5rem; padding-bottom: 1.75rem; --cap: 17.4vw; }
+    .atmo { position: relative; left: 0; top: 0; margin-top: 0.5rem; }
+    .shot { position: relative; left: 0; top: 0; width: 62vw; margin: -1.25rem calc(var(--gut) * -1) 0 auto; display: block; }
+    .sfera { position: relative; right: 0; bottom: 0; margin: 0.875rem 0 0 auto; }
+    .wash { width: 130vw; left: -42vw; top: 7.5rem; }
+    .say { position: relative; left: 0; right: 0; top: 0; margin-top: 1.5rem; padding-right: 6.25rem; }
+    .hero-h { white-space: nowrap; }
+    .say .lead { font-size: var(--t-body); margin-top: 1.6rem; margin-right: -6.25rem; }
+    .cta { position: absolute; right: 0; top: -0.9rem; margin: 0; --sphere: 5.75rem; font-size: var(--t-small); }
+
+    .spot { display: flex; flex-direction: column; }
+    .facts { grid-template-columns: auto 1fr; }
+    .facts dt { white-space: nowrap; }
+    @media (max-width: 370px) { .facts { grid-template-columns: 1fr 1fr; } .facts dt { white-space: normal; } }
+    .two-head { order: -1; margin-bottom: 1.5rem; }
+    .spot .aside { order: 3; }
+    .spot .print { margin-inline: calc(var(--gut) * -1); width: calc(100% + var(--gut) * 2); max-width: none; }
+    .lv .info, .nb .info { margin: -3rem 0 0 1.5rem; }
+    .nb .info { margin: -3rem 1.5rem 0 0; }
+    .lv .aside, .nb .aside { margin: 1.5rem 0 0; padding: 0; }
+
+    .room { display: flex; flex-direction: column; gap: 0; padding-top: var(--block); }
+    .r-h { order: -1; margin-bottom: 1.25rem; padding: 0; }
+    .r-main { order: 0; margin-inline: calc(var(--gut) * -1); width: calc(100% + var(--gut) * 2); max-width: none; }
+    .n1 { order: 1; margin: -2.5rem 0 0 2rem; }
+    .n2 { order: 2; margin: 1.5rem 0 0; }
+    .r-side { order: 3; width: 72%; margin: 1.5rem 0 0 auto; }
+    .n3 { order: 4; margin: -3rem 3rem 0 0; }
+
+    .serv { padding-inline: 0; }
+    .menu { padding-inline: var(--gut); }
+    .in { grid-template-columns: 1fr; row-gap: 1rem; padding-inline: 1rem; margin-inline: -0.25rem; }
+    .pc, .in thead .pc { width: 5.1rem; }
+    .in table { font-size: var(--t-small); }
+
+    .orbit { --fh: 19rem; }
+
+    .masters { display: flex; flex-direction: column; gap: 2.5rem; }
+    .f1, .f2 { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 0; }
+    .f1 .who, .f2 .who { grid-column: 1 / -1; grid-row: 1; margin-bottom: 0.75rem; }
+    .f1 .print { grid-column: 1 / span 4; grid-row: 2; }
+    .f1 .note { grid-column: 3 / span 4; grid-row: 3; margin: -3rem 0 0; }
+    .f2 .print { grid-column: 3 / span 4; grid-row: 2; }
+    .f2 .note { grid-column: 1 / span 4; grid-row: 3; margin: -3rem 0 0; }
+
+    .revs { display: flex; flex-direction: column; gap: 1rem; }
+    .rates, .rates tbody, .rates tr, .rates tbody th, .rates td { display: block; }
+    .rates thead { display: none; }
+    .rates tr + tr { margin-top: 1.25rem; }
+    .rates tbody th { padding: 0 0 0.25rem; }
+    .rates td { padding: 0; }
+    .rates td a { grid-template-columns: 4.5rem auto auto 1fr; font-size: var(--t-body); }
+    .rates td a::before { content: attr(data-src); }
+    .rates td a .under { grid-column: auto; margin-left: 0.4rem; }
+    .v1 { margin-top: 1.5rem; }
+    .snap { margin-top: 2.5rem; }
+    .s1 { margin-right: 3rem; }
+    .s2 { margin-left: 4.5rem; }
+    .s3 { margin-right: 4.5rem; }
+  }
+</style>

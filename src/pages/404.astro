@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import { salon, to } from '../data/salon';
+import watercolor from '../assets/photos/watercolor.jpg';
+---
+<Base title="Сторінку не знайдено · Атмосфера, салон краси у Львові" description="Такої сторінки на сайті салону Атмосфера немає. Перейди на головну, до цін або до онлайн-запису.">
+  <section class="lost">
+    <Image src={watercolor} alt="" widths={[640, 1100, 1600]} sizes="(max-width: 720px) 130vw, 58vw" class="wash" loading="eager" />
+    <div class="atmo"><Wordmark part="atmo" gold /></div>
+    <div class="say">
+      <h1 class="disp h2">Такої сторінки немає</h1>
+      <p class="lead">Можливо, адреса змінилась. Ось куди можна піти звідси.</p>
+      <ul>
+        <li><a class="go" href={to('/')}>На головну</a></li>
+        <li><a class="go" href={to('/tsiny')}>Ціни обох адрес</a></li>
+        <li><a class="go" href={salon.booking} target="_blank" rel="noopener">Записатися онлайн</a></li>
+      </ul>
+    </div>
+    <div class="sfera"><Wordmark part="sfera" gold /></div>
+  </section>
+</Base>
+
+<style>
+  .lost { position: relative; padding: clamp(1.5rem, 4vw, 3rem) var(--gut) 0; overflow: clip; --cap: clamp(4rem, 10vw, 9rem); }
+  .atmo { position: relative; z-index: 2; width: calc(var(--cap) * 2971 / 718); }
+  .sfera { position: relative; z-index: 2; width: calc(var(--cap) * 3228 / 718); margin-left: auto; }
+  .wash { position: absolute; z-index: 1; width: 58vw; height: auto; left: 24vw; top: 2vh; mix-blend-mode: multiply; pointer-events: none; mask-image: radial-gradient(closest-side, var(--color-wall) 72%, transparent 98%); }
+  .say { position: relative; z-index: 3; margin: clamp(1.75rem, 3vw, 2.5rem) 0; max-width: 30rem; }
+  .say .lead { margin-top: 1rem; }
+  .say ul { margin-top: 0.75rem; display: grid; justify-items: start; }
+  @media (max-width: 720px) {
+    .lost { --cap: 17.4vw; }
+    .wash { width: 130vw; left: -30vw; top: 4rem; }
+  }
+</style>

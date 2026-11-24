@@ -1,0 +1,1388 @@
+{
+ "source": "https://blknt.cc/15b2c023",
+ "locations": [
+  {
+   "name": "Atmosfera Beauty Lounge",
+   "address": "вул. Шевченка, 17",
+   "phone": "0685010441",
+   "geo": "49.8449254,24.0090919",
+   "url": "https://blknt.cc/15b2c023/RK3o",
+   "rating": 4.9,
+   "reviews": 2030,
+   "hours": "пн–сб 10:00–20:00; нд 10:00–18:00",
+   "staff": [
+    {
+     "name": "Каріна",
+     "role": "майстер манікюру",
+     "photo": null,
+     "services": 26,
+     "categories": [
+      "Нігтевий сервіс"
+     ]
+    },
+    {
+     "name": "Юлія",
+     "role": "Перукар колорист",
+     "photo": null,
+     "services": 32,
+     "categories": [
+      "Перукарські послуги"
+     ]
+    },
+    {
+     "name": "Ілона",
+     "role": "Бровист",
+     "photo": "staff/ілона.jpg",
+     "services": 15,
+     "categories": [
+      "Брови",
+      "Вії",
+      "Шугаринг"
+     ]
+    },
+    {
+     "name": "Тетяна",
+     "role": "Перукар колорист",
+     "photo": "staff/тетяна.jpg",
+     "services": 39,
+     "categories": [
+      "Перукарські послуги"
+     ]
+    },
+    {
+     "name": "Олена",
+     "role": "Подолог,  топ майстер",
+     "photo": "staff/олена.jpg",
+     "services": 45,
+     "categories": [
+      "Нігтевий сервіс",
+      "Подологія"
+     ]
+    },
+    {
+     "name": "Василина",
+     "role": "Топ майстер",
+     "photo": "staff/василина.jpg",
+     "services": 29,
+     "categories": [
+      "Нігтевий сервіс"
+     ]
+    },
+    {
+     "name": "Ольга",
+     "role": "Бровист-візажист",
+     "photo": "staff/ольга.jpg",
+     "services": 22,
+     "categories": [
+      "Брови",
+      "Вії",
+      "Макіяж",
+      "Шугаринг"
+     ]
+    },
+    {
+     "name": "Лілія",
+     "role": "Майстер манікюру/педикюру/шугарингу",
+     "photo": "staff/лілія.jpg",
+     "services": 51,
+     "categories": [
+      "Нігтевий сервіс",
+      "Шугаринг"
+     ]
+    },
+    {
+     "name": "Марія",
+     "role": "Топ майстер",
+     "photo": "staff/марія.jpg",
+     "services": 36,
+     "categories": [
+      "Нігтевий сервіс"
+     ]
+    }
+   ],
+   "categories": [
+    {
+     "category": "Макіяж",
+     "services": [
+      {
+       "name": "Вечірній макіяж",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1500
+      },
+      {
+       "name": "Макіяж baby face",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1100
+      },
+      {
+       "name": "Денний макіяж",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1300
+      },
+      {
+       "name": "накладні вії",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 200
+      }
+     ]
+    },
+    {
+     "category": "Подологія",
+     "services": [
+      {
+       "name": "Обробка проблемної стопи",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1100
+      },
+      {
+       "name": "Подологічний педикюр пальчиків",
+       "duration_min": 50,
+       "duration": "50 хв",
+       "price": 700
+      },
+      {
+       "name": "Консультація подолога",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 350
+      },
+      {
+       "name": "Подологічний педикюр всієї стопи",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 900
+      },
+      {
+       "name": "Первинна обробка врослих нігтів",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 900
+      },
+      {
+       "name": "Подальша обробка врослих нігтів",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 450
+      },
+      {
+       "name": "Видалення мозоля",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 350
+      },
+      {
+       "name": "Зачистка оніхолізису (1 ніготь) 1 ступінь",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 250
+      },
+      {
+       "name": "Зачистка оніхолізису (1 ніготь) 2 ступінь",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 350
+      },
+      {
+       "name": "Зачистка оніхолізису (1 ніготь) 3 ступінь",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 500
+      },
+      {
+       "name": "Зачистка оніхолізису (всі нігті)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 800
+      },
+      {
+       "name": "Зачистка грибкових нігтів",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1000
+      },
+      {
+       "name": "Тампонування",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 300
+      }
+     ]
+    },
+    {
+     "category": "Нігтевий сервіс",
+     "services": [
+      {
+       "name": "Зняття звичайного лаку",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 100
+      },
+      {
+       "name": "Нарощення нігтів 3-4 довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1800
+      },
+      {
+       "name": ".Манікюр (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": ".Педикюр (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1200
+      },
+      {
+       "name": ".Педикюр (зняття+ пальчики+ покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": ".Педикюр (чистка + покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": "Експрес (одночасний манікюр і педикюр)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 100
+      },
+      {
+       "name": ".Зняття, корекція довжини/форми",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 250
+      },
+      {
+       "name": "Педикюр повний  (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1300
+      },
+      {
+       "name": "Педикюр (чистка + покриття)",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 1200
+      },
+      {
+       "name": "Педикюр пальчики + зняття + покриття",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 1200
+      },
+      {
+       "name": "Японський педикюр (разом з стопою)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 990
+      },
+      {
+       "name": "Апаратна чистка (додатково до чистки рук/ніг)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 100
+      },
+      {
+       "name": "Манікюр (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1200
+      },
+      {
+       "name": "Комбінована чистка",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 550
+      },
+      {
+       "name": "Японський манікюр (разом із чисткою)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 900
+      },
+      {
+       "name": "Однотонне покриття гель-лаком",
+       "duration_min": 40,
+       "duration": "40 хв",
+       "price": 600
+      },
+      {
+       "name": "Френч/лунка на однотонне покриття",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 200
+      },
+      {
+       "name": "Укріплення пудрою",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 50
+      },
+      {
+       "name": "Укріплення гелем",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 150
+      },
+      {
+       "name": "Реставрація квадрата",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 200
+      },
+      {
+       "name": "Зняття+ корекція довжини+ форма",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 250
+      },
+      {
+       "name": "Зняття нарощених нігтів",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 300
+      },
+      {
+       "name": "Нарощення нігтів + манікюр",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1600
+      },
+      {
+       "name": "Корекція нарощених нігтів+манікюр",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1500
+      },
+      {
+       "name": "Нарощення 1 нігтя",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 170
+      },
+      {
+       "name": "Ремонт нігтя під час послуги",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 30
+      },
+      {
+       "name": "Покриття прозорим лікувальним лаком",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 150
+      },
+      {
+       "name": "Покриття лаком",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 250
+      },
+      {
+       "name": "Педикюр апаратний/комбінований",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 700
+      },
+      {
+       "name": "Педикюр (лише пальчики)",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 600
+      },
+      {
+       "name": "Чоловічий манікюр",
+       "duration_min": 40,
+       "duration": "40 хв",
+       "price": 600
+      },
+      {
+       "name": "Чоловічий педикюр",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 850
+      },
+      {
+       "name": "Масаж ступнів",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      }
+     ]
+    },
+    {
+     "category": "Перукарські послуги",
+     "services": [
+      {
+       "name": "Інтенсивне відновлення Dr.Sorbie",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2500
+      },
+      {
+       "name": "Укладка (четверта довжина)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1200
+      },
+      {
+       "name": "Стрижка гарячою ультразвуковою бритвою",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1200
+      },
+      {
+       "name": "Стрижка жіноча (з миттям і укладкою)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1300
+      },
+      {
+       "name": "Модельна стрижка чоловіча з миттям",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 800
+      },
+      {
+       "name": "Стрижка кінців (до 2х см, рівний зріз, довге волосся)",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 800
+      },
+      {
+       "name": "Вкорочення гривки",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 400
+      },
+      {
+       "name": "Чоловіча стрижка",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 600
+      },
+      {
+       "name": "Чоловіча стрижка з миттям",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 700
+      },
+      {
+       "name": "Стрижка бороди",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 300
+      },
+      {
+       "name": "Камуфлювання сивини для чоловіків",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 450
+      },
+      {
+       "name": "Преміум відновлення на основі натуральних компонентів My Organic",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2500
+      },
+      {
+       "name": "Миття (до накрутки, зачіски)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 400
+      },
+      {
+       "name": "Швидка допомога для пошкодженого волосся від Lanza",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 2300
+      },
+      {
+       "name": "Пілінг для шкіри голови від Davines",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1500
+      },
+      {
+       "name": "Маска для волосся",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 300
+      },
+      {
+       "name": "Догляд",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 1200
+      },
+      {
+       "name": "Укладка перша довжина",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 900
+      },
+      {
+       "name": "Укладка друга довжина",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1000
+      },
+      {
+       "name": "Укладка третя довжина",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1100
+      },
+      {
+       "name": "Накрутка друга довжина",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1300
+      },
+      {
+       "name": "Накрутка третя довжина",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 1400
+      },
+      {
+       "name": "Плетіння (коса,колосок, 1шт)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 500
+      },
+      {
+       "name": "Зачіска",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1600
+      },
+      {
+       "name": "Фарбування коріння",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2200
+      },
+      {
+       "name": "Однотонне фарбування перша довжина",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2400
+      },
+      {
+       "name": "Однотонне фарбування друга довжина",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2800
+      },
+      {
+       "name": "Однотонне фарбування третя довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 3200
+      },
+      {
+       "name": "Фарбування з висвітленням перша довжина",
+       "duration_min": 150,
+       "duration": "2 год 30 хв",
+       "price": 3400
+      },
+      {
+       "name": "Фарбування з висвітленням друга довжина",
+       "duration_min": 180,
+       "duration": "3 год",
+       "price": 3800
+      },
+      {
+       "name": "Фарбування з висвітленням третя довжина",
+       "duration_min": 210,
+       "duration": "3 год 30 хв",
+       "price": 4200
+      },
+      {
+       "name": "Складна техніка фарбування 2 довжина",
+       "duration_min": 240,
+       "duration": "4 год",
+       "price": 8000
+      },
+      {
+       "name": "Складна техніка фарбування 3 довжина",
+       "duration_min": 270,
+       "duration": "4 год 30 хв",
+       "price": 8700
+      },
+      {
+       "name": "Складна техніка фарбування 4 довжина",
+       "duration_min": 300,
+       "duration": "5 год",
+       "price": 9000
+      },
+      {
+       "name": "Вихід з чорного",
+       "duration_min": 300,
+       "duration": "5 год",
+       "price": 10000
+      },
+      {
+       "name": "густина",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 400
+      }
+     ]
+    },
+    {
+     "category": "Шугаринг",
+     "services": [
+      {
+       "name": "Обличчя (вусики, підборіддя)",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 200
+      },
+      {
+       "name": "Пахви",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 400
+      },
+      {
+       "name": "Руки до ліктя",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 400
+      },
+      {
+       "name": "Руки повністю",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 500
+      },
+      {
+       "name": "Ноги до колін",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 500
+      },
+      {
+       "name": "Ноги повністю",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 700
+      },
+      {
+       "name": "Бікіні звичайне",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 700
+      },
+      {
+       "name": "Бікіні глибоке",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 800
+      }
+     ]
+    },
+    {
+     "category": "Вії",
+     "services": [
+      {
+       "name": "Ламінування вій",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1100
+      }
+     ]
+    },
+    {
+     "category": "Брови",
+     "services": [
+      {
+       "name": "Прорідження брів",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Ламінування брів",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 500
+      },
+      {
+       "name": "Корекція + фарбування брів",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 750
+      },
+      {
+       "name": "Щастя для брів",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Корекція брів воском/пінцетом",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 400
+      },
+      {
+       "name": "Фарбування фарбою/хною",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 450
+      },
+      {
+       "name": "Фарбування вій",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 350
+      },
+      {
+       "name": "Довготривала укладка+корекція+фарбування",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1100
+      },
+      {
+       "name": "Чоловіча корекція",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 450
+      },
+      {
+       "name": "Восков депіляція вусиків",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Депіляція волосся в носі",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 250
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Atmosfera Nail Bar",
+   "address": "вул. Залізнична, 9",
+   "phone": "0973206020",
+   "geo": "49.8476116,23.9954268",
+   "url": "https://blknt.cc/15b2c023/x1aK",
+   "rating": 4.9,
+   "reviews": 255,
+   "hours": "пн–сб 10:00–20:00; нд 10:00–18:00",
+   "staff": [
+    {
+     "name": "Христина",
+     "role": "Перукар",
+     "photo": null,
+     "services": 41,
+     "categories": [
+      "Перукарські послуги"
+     ]
+    },
+    {
+     "name": "Каріна",
+     "role": "майстер манікюру",
+     "photo": null,
+     "services": 26,
+     "categories": [
+      "Нігтевий сервіс"
+     ]
+    },
+    {
+     "name": "Марта Т.",
+     "role": "Майстер манікюру",
+     "photo": "staff/марта-т.jpg",
+     "services": 28,
+     "categories": [
+      "Нігтевий сервіс"
+     ]
+    },
+    {
+     "name": "Ілона",
+     "role": "Бровист",
+     "photo": "staff/ілона.jpg",
+     "services": 15,
+     "categories": [
+      "Брови",
+      "Вії",
+      "Шугаринг"
+     ]
+    },
+    {
+     "name": "Ольга",
+     "role": "Бровист-візажист",
+     "photo": "staff/ольга.jpg",
+     "services": 22,
+     "categories": [
+      "Брови",
+      "Вії",
+      "Макіяж",
+      "Шугаринг"
+     ]
+    }
+   ],
+   "categories": [
+    {
+     "category": "Макіяж",
+     "services": [
+      {
+       "name": "Вечірній макіяж",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1500
+      },
+      {
+       "name": "Макіяж baby face",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1100
+      },
+      {
+       "name": "Денний макіяж",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1300
+      },
+      {
+       "name": "накладні вії",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 200
+      }
+     ]
+    },
+    {
+     "category": "Нігтевий сервіс",
+     "services": [
+      {
+       "name": "Зняття звичайного лаку",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 100
+      },
+      {
+       "name": "Нарощення нігтів 3-4 довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1800
+      },
+      {
+       "name": ".Манікюр (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": ".Педикюр (зняття+чистка+покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1200
+      },
+      {
+       "name": ".Педикюр (зняття+ пальчики+ покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": ".Педикюр (чистка + покриття)",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1100
+      },
+      {
+       "name": "Експрес (одночасний манікюр і педикюр)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 100
+      },
+      {
+       "name": ".Зняття, корекція довжини/форми",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 250
+      },
+      {
+       "name": "Японський педикюр (разом з стопою)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 990
+      },
+      {
+       "name": "Апаратна чистка (додатково до чистки рук/ніг)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 100
+      },
+      {
+       "name": "Комбінована чистка",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 550
+      },
+      {
+       "name": "Японський манікюр (разом із чисткою)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 900
+      },
+      {
+       "name": "Однотонне покриття гель-лаком",
+       "duration_min": 40,
+       "duration": "40 хв",
+       "price": 600
+      },
+      {
+       "name": "Френч/лунка на однотонне покриття",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 200
+      },
+      {
+       "name": "Укріплення пудрою",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 50
+      },
+      {
+       "name": "Укріплення гелем",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 150
+      },
+      {
+       "name": "Реставрація квадрата",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 200
+      },
+      {
+       "name": "Зняття+ корекція довжини+ форма",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 250
+      },
+      {
+       "name": "Зняття нарощених нігтів",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 300
+      },
+      {
+       "name": "Нарощення нігтів + манікюр",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1600
+      },
+      {
+       "name": "Корекція нарощених нігтів+манікюр",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 1500
+      },
+      {
+       "name": "Нарощення 1 нігтя",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 170
+      },
+      {
+       "name": "Ремонт нігтя під час послуги",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 30
+      },
+      {
+       "name": "Покриття прозорим лікувальним лаком",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 150
+      },
+      {
+       "name": "Покриття лаком",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 250
+      },
+      {
+       "name": "Педикюр апаратний/комбінований",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 700
+      },
+      {
+       "name": "Педикюр (лише пальчики)",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 600
+      }
+     ]
+    },
+    {
+     "category": "Перукарські послуги",
+     "services": [
+      {
+       "name": "Інтенсивне відновлення Dr.Sorbie",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2500
+      },
+      {
+       "name": ".Однотонне фарбування 2 довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 2500
+      },
+      {
+       "name": ".Фарбування з висвітленням 1 довжина",
+       "duration_min": 150,
+       "duration": "2 год 30 хв",
+       "price": 3000
+      },
+      {
+       "name": ".Однотонне фарбування 1 довжина",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2200
+      },
+      {
+       "name": ".Фарбування з висвітленням 2 довжина",
+       "duration_min": 180,
+       "duration": "3 год",
+       "price": 3300
+      },
+      {
+       "name": ".Однотонне фарбування 3 довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 2800
+      },
+      {
+       "name": ".Фарбування з висвітленням 3 довжина",
+       "duration_min": 210,
+       "duration": "3 год 30 хв",
+       "price": 3600
+      },
+      {
+       "name": ".Стрижка жіноча + миття+ укладка",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 990
+      },
+      {
+       "name": "Стрижка кінців (до 2х см, рівний зріз, довге волосся)",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 800
+      },
+      {
+       "name": "Вкорочення гривки",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 400
+      },
+      {
+       "name": "Чоловіча стрижка",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 600
+      },
+      {
+       "name": "Чоловіча стрижка з миттям",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 700
+      },
+      {
+       "name": "Стрижка бороди",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 300
+      },
+      {
+       "name": "Камуфлювання сивини для чоловіків",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 450
+      },
+      {
+       "name": ".Складна техніка фарбування (балаяж, омбре, айртач) друга довжина",
+       "duration_min": 240,
+       "duration": "4 год",
+       "price": 5500
+      },
+      {
+       "name": ".Складна техніка фарбування 3 довжина",
+       "duration_min": 270,
+       "duration": "4 год 30 хв",
+       "price": 5900
+      },
+      {
+       "name": ".Складна техніка фарбування 4 довжина",
+       "duration_min": 300,
+       "duration": "5 год",
+       "price": 6400
+      },
+      {
+       "name": "Преміум відновлення на основі натуральних компонентів My Organic",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2500
+      },
+      {
+       "name": "Миття (до накрутки, зачіски)",
+       "duration_min": 0,
+       "duration": "—",
+       "price": 400
+      },
+      {
+       "name": "Швидка допомога для пошкодженого волосся від Lanza",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 2300
+      },
+      {
+       "name": "Пілінг для шкіри голови від Davines",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1500
+      },
+      {
+       "name": "Маска для волосся",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 300
+      },
+      {
+       "name": "Догляд",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 1200
+      },
+      {
+       "name": "Укладка перша довжина",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 900
+      },
+      {
+       "name": "Укладка друга довжина",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1000
+      },
+      {
+       "name": "Укладка третя довжина",
+       "duration_min": 45,
+       "duration": "45 хв",
+       "price": 1100
+      },
+      {
+       "name": "Накрутка друга довжина",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1300
+      },
+      {
+       "name": "Накрутка третя довжина",
+       "duration_min": 80,
+       "duration": "1 год 20 хв",
+       "price": 1400
+      },
+      {
+       "name": "Плетіння (коса,колосок, 1шт)",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 500
+      },
+      {
+       "name": "Зачіска",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 1600
+      },
+      {
+       "name": "Фарбування коріння",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2200
+      },
+      {
+       "name": "Однотонне фарбування перша довжина",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2400
+      },
+      {
+       "name": "Однотонне фарбування друга довжина",
+       "duration_min": 90,
+       "duration": "1 год 30 хв",
+       "price": 2800
+      },
+      {
+       "name": "Однотонне фарбування третя довжина",
+       "duration_min": 120,
+       "duration": "2 год",
+       "price": 3200
+      },
+      {
+       "name": "Фарбування з висвітленням перша довжина",
+       "duration_min": 150,
+       "duration": "2 год 30 хв",
+       "price": 3400
+      },
+      {
+       "name": "Фарбування з висвітленням друга довжина",
+       "duration_min": 180,
+       "duration": "3 год",
+       "price": 3800
+      },
+      {
+       "name": "Фарбування з висвітленням третя довжина",
+       "duration_min": 210,
+       "duration": "3 год 30 хв",
+       "price": 4200
+      },
+      {
+       "name": "Складна техніка фарбування 2 довжина",
+       "duration_min": 240,
+       "duration": "4 год",
+       "price": 8000
+      },
+      {
+       "name": "Складна техніка фарбування 3 довжина",
+       "duration_min": 270,
+       "duration": "4 год 30 хв",
+       "price": 8700
+      },
+      {
+       "name": "Складна техніка фарбування 4 довжина",
+       "duration_min": 300,
+       "duration": "5 год",
+       "price": 9000
+      },
+      {
+       "name": "густина",
+       "duration_min": 5,
+       "duration": "5 хв",
+       "price": 400
+      }
+     ]
+    },
+    {
+     "category": "Шугаринг",
+     "services": [
+      {
+       "name": "Обличчя (вусики, підборіддя)",
+       "duration_min": 15,
+       "duration": "15 хв",
+       "price": 200
+      }
+     ]
+    },
+    {
+     "category": "Вії",
+     "services": [
+      {
+       "name": "Ламінування вій",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1100
+      }
+     ]
+    },
+    {
+     "category": "Брови",
+     "services": [
+      {
+       "name": "Прорідження брів",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Ламінування брів",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 500
+      },
+      {
+       "name": "Корекція + фарбування брів",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 750
+      },
+      {
+       "name": "Щастя для брів",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Корекція брів воском/пінцетом",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 400
+      },
+      {
+       "name": "Фарбування фарбою/хною",
+       "duration_min": 30,
+       "duration": "30 хв",
+       "price": 450
+      },
+      {
+       "name": "Фарбування вій",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 350
+      },
+      {
+       "name": "Довготривала укладка+корекція+фарбування",
+       "duration_min": 60,
+       "duration": "1 год",
+       "price": 1100
+      },
+      {
+       "name": "Чоловіча корекція",
+       "duration_min": 20,
+       "duration": "20 хв",
+       "price": 450
+      },
+      {
+       "name": "Восков депіляція вусиків",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 200
+      },
+      {
+       "name": "Депіляція волосся в носі",
+       "duration_min": 10,
+       "duration": "10 хв",
+       "price": 250
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+import displayCyr from '@fontsource/tenor-sans/files/tenor-sans-cyrillic-400-normal.woff2?url';
+import Wordmark from '../components/Wordmark.astro';
+import { salon, places, to } from '../data/salon';
+
+interface Props { title: string; description: string; home?: boolean; fab?: boolean }
+const { title, description, home = false, fab = true } = Astro.props;
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: to('/tsiny'), label: 'Ціни' },
+  { href: to('/komanda'), label: 'Майстри' },
+  { href: to('/#adresy'), label: 'Адреси' },
+];
+---
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#c8e2d9" />
+    <link rel="icon" type="image/svg+xml" href={to('/favicon.svg')} />
+    <link rel="preload" as="font" type="font/woff2" href={displayCyr} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">До змісту</a>
+    <header class:list={['hd small', { home }]}>
+      {home
+        ? <span class="where">Львів · Шевченка, 17 · Залізнична, 9</span>
+        : <a class="brand" href={to('/')}><Wordmark part="main" label="Atmosfera Beauty Lounge, головна" /></a>}
+      <nav aria-label="Основна навігація">
+        {nav.map((n) => <a href={n.href} aria-current={here === n.href ? 'page' : undefined}>{n.label}</a>)}
+      </nav>
+      {!home && <a class="sphere book" href={salon.booking} target="_blank" rel="noopener">Запис</a>}
+    </header>
+
+    <main id="main">
+      <slot />
+
+      <!-- Фінал кожної сторінки: контакти на звороті «візитки» -->
+      <footer class="end wrap" id="kontakty">
+        <div class="card back">
+          <div class="sign">
+            <div class="mark"><Wordmark part="full" gold view /></div>
+            <a class="sphere" href={salon.booking} target="_blank" rel="noopener">Записатися</a>
+          </div>
+          {places.map((pl) => (
+            <section class="place">
+              <h2 class="disp h3">{pl.short}</h2>
+              <p class="mute small">{pl.name}</p>
+              <address>Львів, {pl.address}</address>
+              <ul>
+                <li><a class="under tap num" href={pl.phone.href}>{pl.phone.text}</a></li>
+                <li><a class="under tap" href={pl.route} target="_blank" rel="noopener">Маршрут</a></li>
+                <li><a class="under tap" href={pl.booking} target="_blank" rel="noopener">Запис {pl.to}</a></li>
+              </ul>
+            </section>
+          ))}
+          <section class="common">
+            <dl class="hours">
+              {salon.hours.map((h) => (<><dt class="mute">{h.days}</dt><dd class="num">{h.time}</dd></>))}
+            </dl>
+            <p class="mute small">Обидві адреси працюють однаково.</p>
+            <ul>
+              <li><a class="under tap" href={salon.instagram} target="_blank" rel="noopener">Instagram @atmosfera_lv</a></li>
+              <li><a class="under tap" href={salon.direct} target="_blank" rel="noopener">Написати в Direct</a></li>
+            </ul>
+          </section>
+          <p class="note label mute">Концепт сайту від YonkaAgency, зроблений без замовлення салону. Фото й тексти належать салону «Атмосфера», його клієнткам і авторам знімків. Актуальні ціни й розклад дивись в онлайн-записі.</p>
+        </div>
+      </footer>
+
+      <!-- Куля запису на телефоні. Зона починається через один екран, тому на першому екрані її немає. Без JS -->
+      {fab && (
+        <div class="fabzone">
+          <a class="sphere fab" href={salon.booking} target="_blank" rel="noopener">Запис</a>
+        </div>
+      )}
+    </main>
+  </body>
+</html>
+
+<style>
+  .skip { position: absolute; left: var(--gut); top: -4rem; z-index: 50; padding: 0.75rem 1rem; background: var(--color-wall); color: var(--color-mint); }
+  .skip:focus { top: 0.5rem; }
+
+  .hd { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.25rem); min-height: 4.75rem; padding-inline: var(--gut); position: relative; z-index: 5; }
+  .hd.home { position: absolute; inset: 0 0 auto; min-height: 4rem; justify-content: space-between; }
+  .brand { display: inline-flex; align-items: center; min-height: 2.75rem; width: 9.5rem; margin-right: auto; }
+  .hd nav { display: flex; gap: clamp(0.5rem, 2vw, 2rem); }
+  .hd nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.45em; transition: text-decoration-color 0.2s; }
+  .hd nav a:hover, .hd nav a[aria-current] { text-decoration-color: currentColor; }
+  .book { --sphere: 3.75rem; --sphere-bg: var(--color-wall); --sphere-fg: var(--color-mint); font-size: var(--t-label); }
+  @media (max-width: 720px) {
+    .hd, .hd.home { min-height: 3.5rem; }
+    .where, .book { display: none; }
+    .hd.home nav { margin-left: auto; }
+    .brand { width: 7.5rem; }
+  }
+
+  main { position: relative; }
+  .fabzone { display: none; }
+  @media (max-width: 720px) {
+    .fabzone { display: block; position: absolute; inset: 100svh 0 0; z-index: 20; pointer-events: none; }
+    .fab { position: sticky; top: calc(100dvh - 5.75rem - env(safe-area-inset-bottom)); margin: 0 var(--gut) 0 auto; pointer-events: auto; --sphere: 4.75rem; font-size: var(--t-small); box-shadow: 0 0 0 4px var(--color-mint); /* суцільне кільце кольору столу: кулю видно і на пудрі, і на темній картці */ }
+  }
+
+  /* Зворот візитки: темна картка лежить на м'яті, не на всю ширину */
+  .end { padding-block: var(--block) var(--gut); }
+  .back { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 2.5rem; padding-block: clamp(2rem, 4vw, 3.5rem); }
+  .sign { grid-column: 1 / span 4; display: grid; align-content: space-between; justify-items: start; gap: 2rem; }
+  .mark { width: min(15rem, 100%); }
+  .sign .sphere { --sphere: 8rem; }
+  .place { grid-column: span 3; }
+  .common { grid-column: span 2; }
+  .place address { margin-top: 0.75rem; }
+  .place ul, .common ul { margin-top: 0.25rem; display: grid; justify-items: start; }
+  .hours { display: grid; font-size: var(--t-lead); line-height: 1.3; }
+  .hours dt { font-size: var(--t-small); }
+  .hours dd + dt { margin-top: 0.5rem; }
+  .common p { margin-top: 0.4rem; }
+  .note { grid-column: 5 / -1; max-width: 62ch; }
+  @media (max-width: 1100px) {
+    .sign { grid-column: 1 / -1; grid-template-columns: 1fr auto; align-items: center; }
+    .place, .common { grid-column: span 4; }
+    .note { grid-column: 1 / -1; }
+  }
+  @media (max-width: 720px) {
+    .end { padding-bottom: 0; padding-inline: 0; }
+    .back { padding-inline: var(--gut); padding-bottom: 7rem; }
+    .place, .common { grid-column: 1 / -1; }
+    .sign { gap: 1rem; }
+    .mark { width: min(11rem, 50vw); }
+    .sign .sphere { --sphere: 6.25rem; font-size: var(--t-small); }
+  }
+</style>

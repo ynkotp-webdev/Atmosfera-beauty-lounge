@@ -1,0 +1,16 @@
+---
+// Слова клієнтки з Google. Підпис під цитатою веде на всі відгуки тієї адреси, з якої цитата
+import Stars from './Stars.astro';
+import { places } from '../data/salon';
+import type { Quote } from '../data/team';
+
+interface Props { q: Quote; class?: string; text?: string; stars?: boolean }
+// ...rest несе data-astro-cid батьківської сторінки, без нього її стилі позиціювання сюди не дістають
+const { q, class: cls, text, stars = false, ...rest } = Astro.props;
+const pl = places.find((p) => p.short === q.place)!;
+---
+<blockquote class:list={['said', cls]} {...rest}>
+  {stars && <Stars value={5} />}
+  <p class={text}>«{q.text}»</p>
+  <footer><a class="under" href={pl.google.url} target="_blank" rel="noopener">{q.by}, Google, {q.place}</a></footer>
+</blockquote>

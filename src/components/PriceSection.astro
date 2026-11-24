@@ -1,0 +1,90 @@
+---
+// Один аркуш прайсу. Ціну показує для адреси, обраної перемикачем на сторінці (радіокнопки і :has, без JS):
+// .pl видно для Шевченка, .pn для Залізничної. Якщо ціни різні, під ціною дрібно стоїть ціна іншої адреси.
+// <details open>: без JS усе відкрито. На телефоні скрипт у tsiny.astro згортає всі аркуші, крім першого.
+import { uah } from '../data/salon';
+import type { Section, Row } from '../data/prices';
+
+interface Props { s: Section }
+const { s } = Astro.props;
+const pr = (v: number, r: Row) => `${r.addon ? '+ ' : ''}${uah(v)}`;
+const onlyL = s.groups.every((g) => g.rows.every((r) => r.n == null));
+---
+<details class:list={['sheet ps', { 'only-l': onlyL }]} id={s.id} open>
+  <summary><h2 class="disp h2">{s.title}</h2></summary>
+  {s.note && <p class="mute note">{s.note}</p>}
+  {onlyL && <p class="gone">На Залізничній цих послуг немає. <label class="go" for="at-l">Показати ціни на Шевченка</label></p>}
+
+  {s.groups.map((g) => (
+    <div class="group" id={g.id}>
+      {g.title && <h3 class="disp h4">{g.title}</h3>}
+      <table>
+        <thead class="sr"><tr><th scope="col">Послуга</th><th scope="col">Час</th><th scope="col">Ціна</th></tr></thead>
+        <tbody>
+          {g.rows.map((r) => (
+            <tr class:list={{ addon: r.addon, lo: r.n == null }}>
+              <th scope="row">
+                {r.label}
+                {r.incl && <small>{r.incl}</small>}
+                {r.time && <small class="t-m">{r.timeN ? (<><span class="pl">{r.time}</span><span class="pn">{r.timeN}</span></>) : r.time}</small>}
+              </th>
+              <td class="t">
+                {r.timeN ? (<><span class="pl">{r.time}</span><span class="pn">{r.timeN}</span></>) : r.time}
+              </td>
+              <td class="p num">
+                <span class="pl">
+                  {pr(r.l!, r)}
+                  {r.n != null && r.n !== r.l && <small>на Залізничній {uah(r.n)}</small>}
+                </span>
+                <span class="pn">
+                  {r.n != null ? pr(r.n, r) : <span class="no">тільки на Шевченка</span>}
+                  {r.n != null && r.n !== r.l && <small>на Шевченка {uah(r.l!)}</small>}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {g.foot && <p class="foot small mute">{g.foot}</p>}
+    </div>
+  ))}
+</details>
+
+<style>
+  .ps { scroll-margin-top: 1.5rem; padding-block: clamp(1.75rem, 3.4vw, 3rem); }
+  summary { list-style: none; pointer-events: none; }
+  summary::-webkit-details-marker { display: none; }
+  .note { margin-top: 0.5rem; }
+  .group { margin-top: clamp(1.5rem, 2.6vw, 2.25rem); scroll-margin-top: 1.5rem; }
+
+  /* Рядки стоять на повітрі: без лінійок і зебри. Ціна кеглем тексту, табличними цифрами */
+  table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; line-height: 1.3; }
+  tbody th { font-weight: 400; text-align: left; vertical-align: top; padding: 0.5rem 1rem 0.5rem 0; }
+  tbody td { padding: 0.5rem 0; vertical-align: top; }
+  small { display: block; margin-top: 0.1rem; font-size: var(--t-label); line-height: 1.3; font-weight: 400; color: var(--mute); max-width: 46ch; }
+  .t { width: 7.5rem; color: var(--mute); white-space: nowrap; font-size: var(--t-small); }
+  .p { width: 10.5rem; text-align: right; white-space: nowrap; font-weight: 600; }
+  .addon th { padding-left: 1.25rem; }
+  .no { font-weight: 400; font-size: var(--t-small); color: var(--mute); }
+  .t-m, .gone { display: none; }
+  .gone { margin-top: 0.75rem; }
+  .gone .go { cursor: pointer; margin-left: 0.5rem; }
+  .foot { margin-top: 0.75rem; max-width: 60ch; }
+
+  @media (max-width: 900px) {
+    .ps { padding-block: 0.75rem 1.25rem; }
+    summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; cursor: pointer; pointer-events: auto; }
+    summary::after { content: '+'; font-family: var(--font-display); font-size: var(--d3); line-height: 1; width: 1.25rem; text-align: center; }
+    .ps[open] summary::after { content: '–'; }
+    .group:first-of-type { margin-top: 0.75rem; }
+  }
+  @media (max-width: 720px) {
+    table { font-size: var(--t-small); }
+    .t { display: none; }
+    .t-m { display: block; }
+    .p { width: 7.25rem; }
+    .p small { white-space: normal; }
+    tbody th { padding-right: 0.5rem; }
+    .addon th { padding-left: 0.75rem; }
+  }
+</style>

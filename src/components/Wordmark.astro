@@ -1,0 +1,35 @@
+---
+// Вордмарк салону в SVG-контурах (src/data/wordmark.json, зібрано scripts/wordmark.mjs).
+// part: full (з підписом BEAUTY LOUNGE) | main | atmo | sfera.
+// gold: рожеве золото. Тільки для декоративного знака (перший екран, футер, 404): градієнт лежить під маскою букв
+// і зсувається при прокрутці, як відблиск на фользі. Без підтримки scroll-timeline градієнт просто стоїть.
+import paths from '../data/wordmark.json';
+interface Props { part?: keyof typeof paths; gold?: boolean; label?: string; view?: boolean }
+const { part = 'full', gold = false, label, view = false } = Astro.props;
+const { viewBox, d } = paths[part];
+const [, , w, h] = viewBox.split(' ');
+const mask = `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='${viewBox}'><path d='${d}'/></svg>`)}")`;
+---
+{gold ? (
+  <span class:list={['gold', { view }]} style={`aspect-ratio:${w}/${h};--m:${mask}`} aria-hidden="true"></span>
+) : (
+  <svg viewBox={viewBox} style="display:block;width:100%;height:auto" fill="currentColor" role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+    <path d={d} />
+  </svg>
+)}
+
+<style>
+  .gold {
+    display: block; width: 100%;
+    background: linear-gradient(90deg, #b78f85 0%, #e6cbc2 18%, #b98f86 38%, #ecd5cd 58%, #bd958b 78%, #e6cbc2 100%) 0 0 / 170% 100%;
+    -webkit-mask: var(--m) center / 100% 100% no-repeat;
+    mask: var(--m) center / 100% 100% no-repeat;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .gold { animation: sheen linear both; animation-timeline: scroll(root block); animation-range: 0 100vh; }
+      .gold.view { animation-timeline: view(); animation-range: entry 0% exit 100%; }
+      @keyframes sheen { to { background-position: 100% 0; } }
+    }
+  }
+</style>

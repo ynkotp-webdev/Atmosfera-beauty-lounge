@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { places } from '../data/salon';
+import { team } from '../data/team';
+import Said from '../components/Said.astro';
+
+// Групи за напрямом: постійна клієнтка швидше знайде свою майстриню. Кожен майстер стоїть в одній групі
+const has = (m: (typeof team)[number], ...cats: string[]) => m.cats.some((c) => cats.includes(c));
+const groups = [
+  { id: 'nihti', title: 'Нігті та подологія', list: team.filter((m) => has(m, 'Нігтевий сервіс', 'Подологія')) },
+  { id: 'volossia', title: 'Волосся', list: team.filter((m) => has(m, 'Перукарські послуги')) },
+  { id: 'brovy', title: 'Брови, вії, макіяж', list: team.filter((m) => has(m, 'Брови', 'Вії', 'Макіяж') && !has(m, 'Нігтевий сервіс')) },
+];
+const book = (at: string[]) => places.filter((pl) => at.includes(pl.key));
+---
+<Base title="Майстри салону краси Атмосфера у Львові" description="Одинадцять майстрів салону Атмосфера у Львові: манікюр і педикюр, подологія, перукарі-колористи, брови та вії, макіяж. Хто на якій адресі працює і що про них пишуть у відгуках.">
+  <section class="thead wrap grid12">
+    <h1 class="disp h1">Майстри салону краси у&nbsp;Львові</h1>
+    <p class="lead intro">Одинадцять майстрів на двох адресах. Ролі подано так, як їх пише салон в онлайн-записі. Запис відкривається на сторінці адреси, там обираєш майстра й час.</p>
+  </section>
+
+  {groups.map((g) => (
+    <section class="grp wrap grid12" id={g.id}>
+      <h2 class="disp h2 g-h">{g.title}</h2>
+      <ul class="cast">
+        {g.list.map((m) => (
+          <li id={m.id}>
+            {m.photo
+              ? <Image src={m.photo} alt={`${m.name}, ${m.role.toLowerCase()}`} widths={[360, 560, 800, 928]} sizes="(max-width: 720px) 62vw, 23vw" class="face" />
+              : <div class="sheet face nophoto"><span class="disp h2">{m.name}</span></div>}
+            <div class="info">
+              <h3 class:list={['disp h3', { sr: !m.photo }]}>{m.name}</h3>
+              <p class="role">{m.role}</p>
+              <p class="mute small">{m.where}</p>
+              <p class="small areas">Напрями: {m.areas}</p>
+              {m.quote && <Said q={m.quote} text="small" />}
+              <p class="links">
+                {book(m.at).map((pl) => <a class="go" href={pl.booking} target="_blank" rel="noopener">Запис {pl.to}</a>)}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .thead { padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem); row-gap: 1.5rem; }
+  h1 { grid-column: 1 / span 9; }
+  .intro { grid-column: 1 / span 6; }
+
+  /* Назва напряму ліворуч їде за прокруткою, майстри праворуч по три в ряд; середній стовпець нижче */
+  .grp { padding-top: clamp(3.5rem, 7vw, 6.5rem); align-items: start; scroll-margin-top: 1rem; }
+  .g-h { grid-column: 1 / span 3; position: sticky; top: 1.5rem; }
+  .cast { grid-column: 4 / span 9; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); row-gap: clamp(2.5rem, 5vw, 4rem); align-items: start; }
+  .cast li { scroll-margin-top: 1.5rem; }
+  .cast li:nth-child(3n + 2) { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+  .face { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 18%; }
+  /* Без фото: аркуш того ж розміру з іменем, без силуетів-заглушок */
+  .nophoto { display: grid; align-content: end; }
+  .info { margin-top: 1rem; }
+  .role { margin-top: 0.4rem; }
+  .info .mute { margin-top: 0.15rem; }
+  .areas { margin-top: 0.5rem; }
+  .said { margin-top: 1rem; }
+  .links { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+
+  @media (max-width: 1000px) {
+    h1, .intro { grid-column: 1 / -1; }
+    .g-h { grid-column: 1 / -1; position: static; margin-bottom: 1.5rem; }
+    .cast { grid-column: 1 / -1; }
+  }
+  @media (max-width: 720px) {
+    .cast { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 0.875rem; }
+    .cast li:nth-child(3n + 2) { margin-top: 0; }
+    .cast li:nth-child(2n) { margin-top: 2.5rem; }
+    .info .h3 { font-size: var(--d4); }
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import PriceSection from '../components/PriceSection.astro';
+import Said from '../components/Said.astro';
+import { places } from '../data/salon';
+import { sections } from '../data/prices';
+import { q } from '../data/reviews';
+
+const [lv, nb] = places;
+---
+<Base fab={false} title="Ціни салону краси Атмосфера у Львові: Шевченка, 17 і Залізнична, 9" description={`Повний прайс салону Атмосфера у Львові для обох адрес: манікюр і педикюр, подологія, стрижки, фарбування, догляд, брови та вії, макіяж, шугаринг. Ціна й тривалість кожної послуги.`}>
+  <div class="pp">
+    <section class="phead wrap grid12">
+      <h1 class="disp h1">Ціни на двох адресах у&nbsp;Львові</h1>
+      <p class="lead intro">Перемкни адресу, і кожен рядок покаже її ціну. Де ціни різні, друга стоїть дрібно під першою. Доплати йдуть одразу під послугами, до яких додаються.</p>
+      <Said q={q.fair} class="card fair" text="disp h4" />
+    </section>
+
+    <section class="body wrap grid12">
+      <aside class="rail">
+        <div class="switch" role="radiogroup" aria-label="Адреса, для якої показано ціни">
+          <span class="label mute cap">Ціни для адреси</span>
+          <label class="opt ol">
+            <input type="radio" name="at" id="at-l" checked />
+            <span class="disp h4">{lv.short}</span>
+            <span class="small sub">усі послуги</span>
+          </label>
+          <label class="opt on">
+            <input type="radio" name="at" id="at-n" />
+            <span class="disp h4">{nb.short}</span>
+            <span class="small sub">дешевше, послуг менше</span>
+          </label>
+        </div>
+        <nav class="idx" aria-label="Розділи прайсу">
+          <ul>
+            {sections.map((s) => <li><a class="tap" href={`#${s.id}`}>{s.title}</a></li>)}
+          </ul>
+        </nav>
+        <a class="sphere bk pl" href={lv.booking} target="_blank" rel="noopener">Запис {lv.to}</a>
+        <a class="sphere bk pn" href={nb.booking} target="_blank" rel="noopener">Запис {nb.to}</a>
+      </aside>
+
+      <div class="sheets">
+        {sections.map((s) => <PriceSection s={s} />)}
+      </div>
+    </section>
+
+    <!-- Телефон: запис на обрану адресу смугою внизу. Зона починається через один екран, як і куля на інших сторінках -->
+    <div class="barzone">
+      <div class="bar">
+        <a class="pl" href={lv.booking} target="_blank" rel="noopener">Записатися {lv.to}</a>
+        <a class="pn" href={nb.booking} target="_blank" rel="noopener">Записатися {nb.to}</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Без JS усі аркуші відкриті. На телефоні згортаємо всі, крім першого і того, на який прийшли за якорем.
+    (() => {
+      const all = [...document.querySelectorAll('details.ps')];
+      const el = () => location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (matchMedia('(max-width: 900px)').matches) { const keep = el()?.closest('details.ps') || all[0]; all.forEach((d) => (d.open = d === keep)); el()?.scrollIntoView(); }
+      addEventListener('hashchange', () => { const d = el()?.closest('details.ps'); if (d) { d.open = true; el().scrollIntoView(); } });
+    })();
+  </script>
+</Base>
+
+<style is:global>
+  /* Перемикач адреси: радіокнопки керують тим, яку ціну показує кожен рядок. Без JS */
+  .pp:has(#at-l:checked) .pn, .pp:has(#at-n:checked) .pl { display: none; }
+  .pp:has(#at-n:checked) tr.lo th { color: var(--mute); }
+  .pp:has(#at-n:checked) .only-l .group, .pp:has(#at-n:checked) .only-l .note { display: none; }
+  .pp:has(#at-n:checked) .only-l .gone { display: block; }
+  /* Без підтримки :has показуємо ціни Шевченка з дрібною ціною Залізничної під ними, перемикач ховаємо */
+  @supports not selector(:has(*)) {
+    .pp .pn, .pp .switch { display: none; }
+  }
+</style>
+
+<style>
+  .phead { padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(2.5rem, 5vw, 4.5rem); align-items: start; row-gap: 1.5rem; }
+  h1 { grid-column: 1 / span 9; }
+  .intro { grid-column: 1 / span 5; }
+  .fair { grid-column: 8 / span 5; --pad: clamp(1.1rem, 1.8vw, 1.6rem); margin-bottom: -5rem; position: relative; z-index: 2; }
+
+  .body { align-items: start; }
+  .rail { grid-column: 1 / span 3; position: sticky; top: 1.5rem; display: grid; gap: 1.75rem; justify-items: start; }
+  .pp { position: relative; }
+  .barzone { display: none; }
+  .switch { display: grid; gap: 0.5rem; width: 100%; }
+  .opt { display: grid; grid-template-columns: auto 1fr; column-gap: 0.75rem; align-items: center; padding: 0.9rem 1rem; cursor: pointer; background: color-mix(in srgb, var(--color-sage) 38%, var(--color-mint)); min-height: 2.75rem; }
+  .opt input { appearance: none; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--color-mint); grid-row: 1 / span 2; }
+  .opt input:checked { background: currentColor; box-shadow: inset 0 0 0 0.3rem var(--dot, var(--color-wall)); }
+  .opt input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .opt .sub { grid-column: 2; }
+  .ol:has(:checked) { background: var(--color-wall); color: var(--color-mint); --dot: var(--color-wall); }
+  .ol:has(:checked) input { background: var(--color-rose); }
+  .on:has(:checked) { background: var(--color-rose); --dot: var(--color-rose); }
+  .idx ul { display: grid; }
+  .idx a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.3em; }
+  .idx a:hover { text-decoration-color: currentColor; }
+  .bk { --sphere: 7.5rem; --sphere-bg: var(--color-wall); --sphere-fg: var(--color-mint); font-size: var(--t-small); padding: 0.75rem; }
+  .sheets { grid-column: 5 / span 7; display: grid; gap: var(--gap); }
+
+  @media (max-width: 900px) {
+    h1, .intro, .fair { grid-column: 1 / -1; }
+    .fair { margin-bottom: 0; }
+    .rail { display: contents; }
+    .idx, .bk { display: none; }
+    .switch { grid-column: 1 / -1; position: sticky; top: 0; z-index: 10; grid-template-columns: 1fr 1fr; gap: 0.25rem; padding-block: 0.5rem; background: var(--color-mint); margin-bottom: 0.5rem; }
+    .switch .cap { grid-column: 1 / -1; }
+    .opt { padding: 0.5rem; column-gap: 0.4rem; }
+    .opt .sub { display: none; }
+    .opt input { width: 0.9rem; height: 0.9rem; }
+    .opt .h4 { font-size: var(--t-small); white-space: nowrap; }
+    .sheets { grid-column: 1 / -1; gap: 0.5rem; }
+    .barzone { display: block; position: absolute; inset: 100svh 0 0; z-index: 20; pointer-events: none; }
+    .bar { position: sticky; top: calc(100dvh - 3.25rem - env(safe-area-inset-bottom)); pointer-events: auto; background: var(--color-wall); color: var(--color-mint); padding-bottom: env(safe-area-inset-bottom); }
+    .bar a { display: grid; place-items: center; min-height: 3.25rem; font-weight: 600; }
+  }
+  @media (max-width: 340px) {
+    .opt .h4 { white-space: normal; }
+  }
+</style>
